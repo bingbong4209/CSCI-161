@@ -3,12 +3,13 @@ package lab102.stepancj;
 import java.util.Random;
 
 /*
+ *   
  * @author Calvin Stepan
  */
 public class Scores {
 
     int[] list;
-    int count;
+    int count = 0;
     Random rand = new Random();
 
     public Scores() {
@@ -20,19 +21,22 @@ public class Scores {
     }
 
     public void add(int num) {
-        if (list[list.length - 1] == 0) {
-            list[list.length - 1] = num;
-        } else {
+
+        if (count == list.length - 1) {
             int[] temp = new int[list.length + 1];
-            for(int i: list) {
+            for (int i = 0; i < list.length - 1; i++) {
                 list[i] = temp[i];
             }
             temp[temp.length] = num;
+            count++;
+        } else if (list[count] == 0) {
+            list[count] = num;
+            count++;
         }
     }
 
     public boolean isEmpty() throws NullPointerException {
-        for (int i : list) {
+        for (int i = 0; i < list.length - 1; i++) {
             if (!(list[i] == 0)) {
                 return false;
             }
@@ -41,7 +45,7 @@ public class Scores {
     }
 
     public void clear() {
-        for (int i : list) {
+        for (int i = 0; i < list.length - 1; i++) {
             list[i] = 0;
         }
     }
@@ -52,7 +56,7 @@ public class Scores {
 
     public int getFrequencyOf(int num) {
         int numCount = 0;
-        for (int i : list) {
+        for (int i = 0; i < list.length - 1; i++) {
             if (list[i] == num) {
                 numCount++;
             }
@@ -61,7 +65,7 @@ public class Scores {
     }
 
     public boolean contains(int num) {
-        for (int i : list) {
+        for (int i = 0; i < list.length - 1; i++) {
             if (list[i] == num) {
                 return true;
             }
@@ -70,9 +74,10 @@ public class Scores {
     }
 
     public void remove(int num) {
-        for (int i : list) {
+        for (int i = 0; i < list.length - 1; i++) {
             if (list[i] == num) {
                 list[i] = 0;
+                count--;
                 break;
             }
         }
@@ -81,9 +86,10 @@ public class Scores {
     public void remove() {
         if (isEmpty()) {
         } else {
-            for (int i : list) {
+            for (int i = 0; i < list.length - 1; i++) {
                 if (i == rand.nextInt(count)) {
                     list[i] = 0;
+                    count--;
                     break;
                 }
             }
@@ -97,7 +103,7 @@ public class Scores {
     }
 
     public String toString() {
-        for (int i : list) {
+        for (int i = 0; i < list.length - 1; i++) {
             System.out.println(list[i]);
         }
         return getClass().getName() + "@" + list.length + ":" + count;
