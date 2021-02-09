@@ -3,11 +3,14 @@ package lab103.stepancj;
 import java.util.Random;
 
 /**
- *
+ * Scores Class in its entirety
+ * from Lab102-StepanCJ
+ * transcribed by 
  * @author Calvin Stepan
- * @param <E> Generic Object
+ * @param <E> Generic Type
+ * @version 1.9.2021
  */
-public abstract class ArrayBag<E> implements Bag<E>{
+public class ArrayBag<E> implements Bag<E>{
 
     E[] list;
     int count = 0;
@@ -59,7 +62,7 @@ public abstract class ArrayBag<E> implements Bag<E>{
         }
         return true;
     }
-
+//-----------------------------------------FIX THE CLEAR METHOD
     /**
      * Clears out the list by putting zeros into each slot in the array
      */

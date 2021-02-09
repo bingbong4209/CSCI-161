@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lab103.stepancj;
 
 /**
@@ -11,6 +6,7 @@ package lab103.stepancj;
  * Goldwasser Transcribed by
  *
  * @author Calvin Stepan
+ * @version 1.9.2021
  */
 public class SinglyLinkedList<E> {
 //---------------- nested Node class ----------------
