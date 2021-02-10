@@ -75,4 +75,8 @@ public class Player {
     public void setJerseyNumber(int jerseyNumber) {
         this.jerseyNumber = jerseyNumber;
     }
+    
+    public String toString() {
+        return getClass().getName() + "@" + name + ":" + jerseyNumber + ":" + positionPlayed;
+    }
 }

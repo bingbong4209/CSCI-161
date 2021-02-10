@@ -14,7 +14,7 @@ public class LinkedBag<E> implements Bag<E> {
     Random rand = new Random();
 
     public LinkedBag() {
-        list = new SinglyLinkedList();
+        list = new SinglyLinkedList<>();
     }
 
     public LinkedBag(int size) {
@@ -61,7 +61,7 @@ public class LinkedBag<E> implements Bag<E> {
     public int getFrequencyOf(E e) {
         int numCount = 0;
         for (int i = 0; i < list.size(); i++) {
-            if (list.getElement(i) == e) {
+            if (this.get(i) == e) {
                 numCount++;
             }
         }
@@ -74,7 +74,7 @@ public class LinkedBag<E> implements Bag<E> {
      */
     public boolean contains(E e) {
         for (int i = 0; i < list.size(); i++) {
-            if (list.getElement(i) == e) {
+            if (this.get(i) == e) {
                 return true;
             }
         }
@@ -83,28 +83,45 @@ public class LinkedBag<E> implements Bag<E> {
 
     /**
      * removes the first instance of the given number in the array
+     *
      * @param e
      */
     public E remove(E e) {
-       list.removeFirst();
+        SinglyLinkedList<E> temp = new SinglyLinkedList<>();
+        E removedElement = null;
+        E tempElement;
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            tempElement = list.removeFirst();
+            if (tempElement.equals(e)) {
+                removedElement = tempElement;
+            } else {
+                temp.addLast(tempElement);
+            }
+        }
+        list = temp;
+        return removedElement;
     }
 
     /**
      * removes the number at the pseudo-randomly generated index
      */
     public E remove() {
-        int index = 0;
-        if (isEmpty()) {
-        } else {
-            for (int i = 0; i < list.size(); i++) {
-                if (i == rand.nextInt(list.size())) {
-                    list.getElement(i) = null;
-                    i = index;
-                    break;
-                }
+        SinglyLinkedList<E> temp = new SinglyLinkedList<>();
+        E removedElement = null;
+        E tempElement;
+        int randomIndex = rand.nextInt(list.size());
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            tempElement = list.removeFirst();
+            if (i ==  randomIndex) {
+                removedElement = tempElement;
+            } else {
+                temp.addLast(tempElement);
             }
         }
-        return list.getElement(index);
+        list = temp;
+        return removedElement;
     }
 
     /**
@@ -112,9 +129,21 @@ public class LinkedBag<E> implements Bag<E> {
      * @param i the index of the number to get from the array
      * @return the number at the index of i
      */
-    public E get(int i) throws ArrayIndexOutOfBoundsException{
-        E index = list.getElement(i);
-        return index;
+    public E get(int index) throws ArrayIndexOutOfBoundsException {
+        E temp = null;
+        if (index < 0 || index > list.size()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        for (int j = 0; j < list.size(); j++) {
+            temp = list.removeFirst();
+            if (j == index) {
+                return list.first();
+            } else {
+                list.addLast(temp);
+            }
+
+        }
+        return temp;
     }
 
     /**
@@ -122,12 +151,14 @@ public class LinkedBag<E> implements Bag<E> {
      * the array, and the whole array
      */
     public String toString() {
-        String temp = "";
+        String temp = getClass().getName() + "@" + list.size() + "\n";
+        E element;
         for (int i = 0; i < list.size(); i++) {
-            temp += list.getElement(i) + " ";
+            element = list.removeFirst();
+            temp += " " + element.toString() + "\n";
+            list.addLast(element);
         }
-        temp += "\n";
-        return getClass().getName() + "@" + list.size() + ":" + temp;
+        return temp;
     }
 
     /**

@@ -11,8 +11,8 @@ public class Client {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ArrayBag MensTeam = new ArrayBag(2);
-        LinkedBag WomensTeam = new LinkedBag(2);
+        ArrayBag<Player> MensTeam = new ArrayBag<>(2);
+        LinkedBag<Player> WomensTeam = new LinkedBag<>(2);
 
         //Instantiate the men's football team players to be inserted into the list later
         Player jonPlayer = new Player("Jon", "Center", 99);
@@ -45,7 +45,7 @@ public class Client {
         MensTeam.add(jiffyPlayer);
         MensTeam.add(jaRulePlayer);
         MensTeam.add(jensonPlayer);
-
+        
         //display the current roster
         System.out.print(MensTeam.toString());
 
