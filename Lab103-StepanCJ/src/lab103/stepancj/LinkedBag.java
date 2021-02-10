@@ -3,7 +3,6 @@ package lab103.stepancj;
 import java.util.Random;
 
 /**
- *
  * @author Calvin Stepan
  * @version 1.9.2021
  * @param <E> Generic Type
@@ -22,8 +21,7 @@ public class LinkedBag<E> implements Bag<E> {
     }
 
     /**
-     *
-     * @param e any generic object
+     * @param e a generic type object
      */
     public void add(E e) {
         list.addLast(e);
@@ -83,8 +81,7 @@ public class LinkedBag<E> implements Bag<E> {
 
     /**
      * removes the first instance of the given number in the array
-     *
-     * @param e
+     * @param e a generic type object
      */
     public E remove(E e) {
         SinglyLinkedList<E> temp = new SinglyLinkedList<>();
@@ -126,8 +123,8 @@ public class LinkedBag<E> implements Bag<E> {
 
     /**
      *
-     * @param i the index of the number to get from the array
-     * @return the number at the index of i
+     * @param index the index of the number to get from the array
+     * @return the generic type object stored at the given index
      */
     public E get(int index) throws ArrayIndexOutOfBoundsException {
         E temp = null;

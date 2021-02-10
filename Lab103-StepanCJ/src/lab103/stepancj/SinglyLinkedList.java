@@ -1,10 +1,12 @@
 package lab103.stepancj;
 
 /**
- * SinglyLinkedList Class Code Fragments 3.14, 3.15 from Data Structures and
- * Algorithms, 6th Edition by Michael T. Goodrich, Roberto Tamassia & Michael H.
- * Goldwasser Transcribed by
- *
+ * SinglyLinkedList Class 
+ * This class creates lists where only the head and tail pieces are accessible
+ * This uses a node system to keep track of the head and tail as they change
+ * Code Fragments 3.14, 3.15 from Data Structures and Algorithms, 6th Edition by
+ * Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser 
+ * Transcribed by 
  * @author Calvin Stepan
  * @version 1.9.2021
  */

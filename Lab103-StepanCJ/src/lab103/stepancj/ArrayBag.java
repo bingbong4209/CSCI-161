@@ -61,7 +61,6 @@ public class ArrayBag<E> implements Bag<E> {
         }
         return true;
     }
-//-----------------------------------------FIX THE CLEAR METHOD
 
     /**
      * Clears out the list by putting zeros into each slot in the array
@@ -81,8 +80,8 @@ public class ArrayBag<E> implements Bag<E> {
     }
 
     /**
-     * @param num any whole number
-     * @return the frequency of the number "num"
+     * @param e a generic type object
+     * @return the frequency of the generic e
      */
     public int getFrequencyOf(E e) {
         int numCount = 0;
@@ -95,8 +94,7 @@ public class ArrayBag<E> implements Bag<E> {
     }
 
     /**
-     *
-     * @param num any whole number
+     * @param e a generic type object
      * @return whether or not the array contains the given number
      */
     public boolean contains(E e) {
@@ -109,9 +107,8 @@ public class ArrayBag<E> implements Bag<E> {
     }
 
     /**
+     * @param e a generic type object
      * removes the first instance of the given number in the array
-     *
-     * @param num any whole number to be removed from the array
      */
     public E remove(E e) {
         int i;
@@ -147,7 +144,7 @@ public class ArrayBag<E> implements Bag<E> {
     /**
      *
      * @param i the index of the number to get from the array
-     * @return the number at the ith index
+     * @return the number at the given index
      */
     public E get(int i) {
         E index = list[i];

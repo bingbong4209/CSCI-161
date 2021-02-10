@@ -31,7 +31,7 @@ public interface Bag<E> {
 
     /**
      * @param e a generic type
-     * @return a boolean telling the user whether or not the Bag contains e
+     * @return a Boolean telling the user whether or not the Bag contains e
      */
     boolean contains(E e);
 
