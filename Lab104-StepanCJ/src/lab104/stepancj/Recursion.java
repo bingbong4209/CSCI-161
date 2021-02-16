@@ -3,15 +3,12 @@ package lab104.stepancj;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 /**
  *
  * @author Calvin Stepan
  */
 public class Recursion {
-
-    Scanner scan = new Scanner(System.in);
-    File inputFile;
-
     /**
      * 
      * @param n any whole number greater than 0
@@ -25,23 +22,44 @@ public class Recursion {
         } else {
             return ((1.0 / n) + (Harmonic(n - 1.0)));
         }
-        return 0;//for the compiler, should never actually be reached
+        return 0;// for the compiler, should never actually be reached
     }
 
     /**
      * 
-     * @return 
+     * @param file
+     * @return
      */
-    public static int Isabel(int n) {
-        
-        for(int i = 0; i < (n/2) - 1; i++) {
-            
+    public static int Isabel(File file) {
+        /**
+         * 1) open the ASCII text file
+         * 2) scan the contents of the document and put the values into an array A
+         * 3) create an array B that is half the size of A
+         * ASCII File is just a text file
+         * 
+         */
+        Scores A = new Scores();
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch(FileNotFoundException fnfe) {
+            System.err.print("Invalid File");
         }
-        return 1;
-    }
+        while(scan.hasNextInt()) {
+            A.add(scan.nextInt());
+        }
+
+//        Scores B = new Scores(A / 2);
+//        if (B.size() == 1) {
+//            return B.get(0);
+//        } else {
+//            return B.get(B.size()) + Isabel(B.size() - 1);
+//        }
+return 0;
+  }
 
     public void find(String startPath, String filename) throws FileNotFoundException {
-
+        throw new FileNotFoundException("Invalid file path");
     }
 
 }

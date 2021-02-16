@@ -48,6 +48,9 @@ public class Client {
                 break;
             case "2":
                 System.out.println("Using Isabel's Technique");
+                response = JOptionPane.showInputDialog(null, "Please enter a positive double value", "nth Harmonic Number", 0);
+                option = Double.parseDouble(response);
+                JOptionPane.showMessageDialog(null, "The Answer is " + Recursion.Harmonic(option), "Answer", 0);
                 break;
             case "3":
                 System.out.println("Printing and Finding");
