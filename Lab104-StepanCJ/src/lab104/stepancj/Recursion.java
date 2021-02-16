@@ -11,12 +11,7 @@ import java.io.FileNotFoundException;
 public class Recursion {
     
     public void find(String startPath, String filename) {
-        try {
-            File findFile = new File(filename);
-            
-        } catch (FileNotFoundException fnfe) {
-            
-        }
+        
     }
     
 }
