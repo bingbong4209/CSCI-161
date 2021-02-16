@@ -12,22 +12,21 @@ public class Client {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JOptionPane.showInputDialog("Please Select the algorithm you would like to test: \n 1) nth Harmonic Number \n 2) Isabel's Technique \n 3) Print and Find");
 
-        showInputDialogExample();
+        //showInputDialogExample("Please Select the algorithm you would like to test: \n 1) nth Harmonic Number \n 2) Isabel's Technique \n 3) Print and Find", "Algorithm Selection");
 
         showInputDialogMenuExample();
 
-        showMessageDialogExample();
+        //showMessageDialogExample();
 
-        showConfirmDialogExample();
+        //showConfirmDialogExample();
 
     }
 
-    public static void showInputDialogExample() {
+    public static void showInputDialogExample(String message, String title) {
         String response;
 
-        response = JOptionPane.showInputDialog(null, "My Question", "My Title", 0);
+        response = JOptionPane.showInputDialog(null, message, title, 0);
 
         System.out.println("respone = " + response);
     }
@@ -35,24 +34,25 @@ public class Client {
     public static void showInputDialogMenuExample() {
         String response;
 
-        String optionString = "A to run method A\nB to run method B\nC to exit";
+        String optionString = "Please Select the algorithm you would like to test: \n 1) nth Harmonic Number \n 2) Isabel's Technique \n 3) Print and Find";
 
-        response = JOptionPane.showInputDialog(null, optionString, "My Title", 0);
+        response = JOptionPane.showInputDialog(null, optionString, "Algorithm Selection", 0);
+        double option;
 
         switch (response) {
-            case "a":
-            case "A":
-                System.out.println("Calling method A");
+            case "1":
+                System.out.println("Computing the nth Harmonic Number");
+                response = JOptionPane.showInputDialog(null, "Please enter a positive double value", "nth Harmonic Number", 0);
+                option = Double.parseDouble(response);
+                JOptionPane.showMessageDialog(null, "The Answer is " + Recursion.Harmonic(option), "Answer", 0);
                 break;
-            case "b":
-            case "B":
-                System.out.println("Calling method B");
+            case "2":
+                System.out.println("Using Isabel's Technique");
                 break;
-            case "c":
-            case "C":
-                System.out.println("Setting sential flag to exit loop");
+            case "3":
+                System.out.println("Printing and Finding");
             default:
-                System.out.println("Should not be able to get here!!!");
+                System.err.println("invalid entry");
         }
     }
 
