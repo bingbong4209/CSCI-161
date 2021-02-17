@@ -30,33 +30,34 @@ public class Recursion {
      * @param file
      * @return
      */
-    public static int Isabel(File file) {
+    public static int Isabel(int n) {
         /**
-         * 1) open the ASCII text file
-         * 2) scan the contents of the document and put the values into an array A
-         * 3) create an array B that is half the size of A
-         * ASCII File is just a text file
+         * 1) open the ASCII text file 2) scan the contents of the document and put the
+         * values into an array A 3) create an array B that is half the size of A ASCII
+         * File is just a text file
          * 
          */
-        Scores A = new Scores();
+        Scores A = new Scores(n);
         Scanner scan = null;
         try {
-            scan = new Scanner(file);
-        } catch(FileNotFoundException fnfe) {
-            System.err.print("Invalid File");
+            scan = new Scanner(new File("Lab104-StepanCJ\\src\\lab104\\asciFileTest.txt"));
+        } catch (FileNotFoundException fnfe) {
+            System.err.println("Invalid file path");
         }
-        while(scan.hasNextInt()) {
+        while (scan.hasNextInt()) {
             A.add(scan.nextInt());
         }
 
-//        Scores B = new Scores(A / 2);
-//        if (B.size() == 1) {
-//            return B.get(0);
-//        } else {
-//            return B.get(B.size()) + Isabel(B.size() - 1);
-//        }
-return 0;
-  }
+        Scores B = new Scores(A.count / 2);
+        for(int i = 0; i < ((n/2) - 1); i++) {
+            int asdf = A.get(2 * i) + A.get((2 * i) + 1);
+        }
+        if (B.size() == 1) {
+            return B.get(0);
+        } else {
+            return B.get(B.count + Isabel(B.count - 1));
+        }
+    }
 
     public void find(String startPath, String filename) throws FileNotFoundException {
         throw new FileNotFoundException("Invalid file path");
