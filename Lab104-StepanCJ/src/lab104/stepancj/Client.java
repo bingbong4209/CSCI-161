@@ -62,7 +62,9 @@ public class Client {
             case "2":
                 System.out.println("Using Isabel's Technique");
                 response = JOptionPane.showInputDialog(null, "Please enter a starting size for the array", "Size", 0);
-                System.out.println(Recursion.Isabel(5));
+                answer = Integer.parseInt(response);
+                System.out.println(answer);
+                System.out.println(Recursion.Isabel(answer));
                 break;
             case "3":
                 System.out.println("Printing and Finding");
