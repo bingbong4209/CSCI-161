@@ -19,10 +19,6 @@ public class Client {
 
         showInputDialogMenuExample();
 
-        // showMessageDialogExample();
-
-        // showConfirmDialogExample();
-
     }
 
     public static void showInputDialogExample(String message, String title) {
@@ -57,33 +53,23 @@ public class Client {
                         "nth Harmonic Number", 0);
                     option = Double.parseDouble(response);
                 }
-                JOptionPane.showMessageDialog(null, "The Answer is " + Recursion.Harmonic(option), "Answer", 0);
+                Recursion.harmonicSetup(option);
+                JOptionPane.showMessageDialog(null, "The Answer is " + Recursion.harmonicComputation(option), "Answer", 0);
                 break;
             case "2":
                 System.out.println("Using Isabel's Technique");
-                response = JOptionPane.showInputDialog(null, "Please enter a starting size for the array", "Size", 0);
-                answer = Integer.parseInt(response);
-                System.out.println(answer);
-                System.out.println(Recursion.Isabel(answer));
+                response = JOptionPane.showInputDialog(null, "Please enter a file path", "Size", 0);
+                int[] A = Recursion.isabelsTechniqueSetup(response); 
+                JOptionPane.showMessageDialog(null, "The summation of the array is " + Recursion.isabelsTechnique(A));
                 break;
             case "3":
+                String pathName = JOptionPane.showInputDialog("Please enter the start path");
+                String fileName = JOptionPane.showInputDialog("Please enter the file name");
+                Recursion.find(pathName, fileName);
                 System.out.println("Printing and Finding");
             default:
                 System.err.println("invalid entry");
         }
     }
-
-    public static void showMessageDialogExample() {
-        String response = "George";
-
-        JOptionPane.showMessageDialog(null, null, response, 0);
-    }
-
-    public static void showConfirmDialogExample() {
-        String response = "Are you sure your name is George?";
-
-        int reply = JOptionPane.showConfirmDialog(null, null, response, 0);
-
-        System.out.println(reply);
-    }
+    //C:\\Users\\Calvin\\Downloads\\ab.txt
 }

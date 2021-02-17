@@ -9,81 +9,110 @@ import java.util.Scanner;
  * @author Calvin Stepan
  */
 public class Recursion {
-    /**
-     * 
-     * @param n any whole number greater than 0
-     * @return the sum of the harmonic numbers through n
-     */
-    public static double Harmonic(double n) {
+
+    public static void harmonicSetup(double n) {
         if (n < 0) {
             System.err.print("Value for n is invalid, would you like to try again?");
-        } else if (n == 1) {
+        }
+    }
+
+    public static double harmonicComputation(double n) {
+        if (n == 1) {
             return 1.0;
         } else {
-            return ((1.0 / n) + (Harmonic(n - 1.0)));
+            return ((1.0 / n) + (harmonicComputation(n - 1.0)));
         }
-        return 0;// for the compiler, should never actually be reached
     }
 
-    /**
-     * 
-     * @param file
-     * @return
-     */
-    public static int Isabel(int n) {
+    public static boolean isPowerOfTwo(int n) {
+        if (n == 0) {
+            return false;
+        }
+
+        while (n != 1) {
+            if (n % 2 != 0) {
+                return false;
+            }
+            n = n / 2;
+        }
+        return true;
+    }
+
+    public static int[] isabelsTechniqueSetup(String filePath) {
+        Scanner scan = null;
+        ArrayBag<Integer> Bag = new ArrayBag<>();
+        int[] A = new int[2];
+
+        try {
+            scan = new Scanner(new File(filePath));
+        } catch (FileNotFoundException fnfe) {
+            System.err.println("Invalid file path");
+        }
+        while (scan.hasNext()) {
+            String token = scan.next();
+
+            try {
+                int inInt = Integer.parseInt(token);
+                Bag.add(inInt);
+            } catch (NumberFormatException nfe) {
+            }
+        }
+
+        //Power of 2 check
+        if (isPowerOfTwo(Bag.count)) {
+            A = new int[Bag.count];
+
+            for (int i = 0; i < Bag.count; i++) {
+                A[i] = Bag.get(i);
+            }
+        } else {
+            System.err.println("The number of elements in the text file is not a power of two");
+        }
+
+        return A;
+    }
+
+    public static int isabelsTechnique(int[] A) throws IllegalArgumentException {
         /**
-         * 1) open the ASCII text file 2) scan the contents of the document and put the
-         * values into an array A 3) create an array B that is half the size of A ASCII
-         * File is just a text file
-         * 
+         * 1) open the ASCII text file 2) scan the contents of the document and
+         * put the values into an array A 3) create an array B that is half the
+         * size of A ASCII File is just a text file
+         *
          */
+        // base case
+        if (A.length == 1) {
+            return A[0];
+        }
+
+        // general case
+        int[] arrayB = new int[A.length / 2];
+        {
+            for (int i = 0; i < arrayB.length; i++) {
+                arrayB[i] = A[2 * i] + A[2 * i + 1];
+            }
+
+            return isabelsTechnique(arrayB);
+        }
+
         /*
-        Scores A = new Scores(n);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(new File("Lab104-StepanCJ\\src\\lab104\\asciFileTest.txt"));
-        } catch (FileNotFoundException fnfe) {
-            System.err.println("Invalid file path");
-        }
-        while (scan.hasNextInt()) {
-            A.add(scan.nextInt());
-        }
+        int[] B = new int[A.length / 2];
+        for (int i = 0; i < ((A.length / 2) - 1); i++) {
+            B[i] = A[2 * i] + A[(2 * i) + 1];
 
-        Scores B = new Scores(A.count / 2);
-        for(int i = 0; i < ((n/2) - 1); i++) {
-            int asdf = A.get(2 * i) + A.get((2 * i) + 1);
-            asdf = B;
         }
-        if (B.size() == 1) {
-            return B.get(0);
+        if (B.length == 1) {
+            return B[0];
         } else {
-            return B.get(B.count + Isabel(B.count - 1));
+            return isabelsTechnique(B);
         }
-*/
-        Scores A = new Scores(Math.abs(n));//why does this return a negative value?
-        Scanner scan = null;
-        try {
-            scan = new Scanner(new File("Lab104-StepanCJ\\src\\lab104\\asciFileTest.txt"));
-        } catch (FileNotFoundException fnfe) {
-            System.err.println("Invalid file path");
-        }
-        while (scan.hasNextInt()) {
-            A.add(scan.nextInt());
-        }
-
-        Scores B = new Scores(A.count / 2);
-        for(int i = 1; i < ((n/2) - 1); i++) {
-            B.add(A.get(2 * i) + A.get((2 * i) + 1));  
-        }
-        if (B.size() == 1) {
-            return B.get(0);
-        } else {
-            return B.get(B.count + Isabel(B.size() - 1));
-        }
+         */
     }
-
-    public void find(String startPath, String filename) throws FileNotFoundException {
-        throw new FileNotFoundException("Invalid file path");
+    
+    public static void find(String startPath, String filename) {
+        File path = new File(startPath);
+        if(path != null && path.isFile()) {
+            
+        }
     }
 
 }
