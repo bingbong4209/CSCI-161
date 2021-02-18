@@ -21,12 +21,12 @@ public class Client {
     public static void showInputDialogMenuExample2() {
         String response;
 
-        String optionString = "Please Select the algorithm you would like to test: \n 1) nth Harmonic Number \n 2) Isabel's Technique \n 3) Find and Print";
+        String optionString = "Please Select the algorithm you would like to test: \n 1) nth Harmonic Number \n 2) Isabel's Technique \n 3) Find and Print \n 4) Exit";
 
         response = JOptionPane.showInputDialog(optionString);  
         int answer = Integer.parseInt(response);
-        while (!(answer > 0 && answer < 4)) {
-            JOptionPane.showMessageDialog(null, "Your entry was not 1, 2, or 3, please try again");
+        while (!(answer > 0 && answer < 5)) {
+            JOptionPane.showMessageDialog(null, "Your entry was not 1-4, please try again");
             response = JOptionPane.showInputDialog(optionString);
             answer = Integer.parseInt(response);
         }
@@ -72,6 +72,9 @@ public class Client {
                     fileName = JOptionPane.showInputDialog("Please enter the file name");
                 }
                 Recursion.find(pathName, fileName);
+            case "4":
+                JOptionPane.showMessageDialog(null, "Thanks for using our interface, do come back again :)");
+                break;
             default:
             //JOptionPane.showInputDialog(response)
         }
