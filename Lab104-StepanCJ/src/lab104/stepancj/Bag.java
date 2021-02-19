@@ -1,7 +1,7 @@
 package lab104.stepancj;
 
 /**
- *
+ * Reused from Lab103-Stepan CJ
  * @author Calvin Stepan
  * @param <E> Generic Object
  * @version 1.9.2021

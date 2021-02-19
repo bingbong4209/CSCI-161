@@ -6,6 +6,7 @@ import java.util.Random;
  * Scores Class in its entirety from Lab102-StepanCJ transcribed by
  *
  * @author Calvin Stepan
+ * Reused from Lab103-StepanCJ
  * @param <E> Generic Type
  * @version 1.9.2021
  */
