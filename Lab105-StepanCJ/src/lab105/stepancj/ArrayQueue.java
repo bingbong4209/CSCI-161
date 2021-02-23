@@ -1,13 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lab105.stepancj;
 
 /**
- *
+ * Data Structures & Algorithms 6th Edition 
+ * Goodrich, Tamassia, Goldwasser
+ * Code Fragment 6.10
+ * An implementation of a the ArrayQueue Class
+ * Transcribed by 
+ * 
  * @author Calvin Stepan
+ * @version 2.23.2021
  * @param <E>
  */
 //Implementation of the queue ADT using a fixed-length array
@@ -17,10 +18,10 @@ package lab105.stepancj;
     private E[] data; // generic array used for storage
     private int f = 0; // index of the front element
     private int sz = 0; // current number of elements
-
+    
     // constructors
     public ArrayQueue() {
-        this(10);//---------Figure out what the initial capacity is
+        this(16);//---------Figure out what the initial capacity is
     } // constructs queue with default capacity
 
     public ArrayQueue(int capacity) { // constructs queue with given capacity

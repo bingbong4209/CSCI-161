@@ -1,13 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lab105.stepancj;
 
 /**
- *
+ * Data Structures & Algorithms 6th Edition 
+ * Goodrich, Tamassia, Goldwasser
+ * Code Fragments 7.2, 7.3, 7.4, and 7.5
+ * An implementation of the ArrayList class
+ * This class implements the List Interface and uses the array as its container
+ * Transcribed by 
+ * 
  * @author Calvin Stepan
+ * @version 2.23.2021
+ * @param <E>
  */
 public class ArrayList<E> implements List<E> {
     // instance variables

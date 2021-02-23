@@ -1,13 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lab105.stepancj;
 
 /**
- *
+ * Data Structures & Algorithms 6th Edition 
+ * Goodrich, Tamassia, Goldwasser
+ * Code Fragment 7.1
+ * An implementation of the List Interface
+ * Transcribed by 
+ * 
  * @author Calvin Stepan
+ * @version 2.23.2021
  * @param <E>
  */
 //A simplified version of the java.util.List interface. ∗/

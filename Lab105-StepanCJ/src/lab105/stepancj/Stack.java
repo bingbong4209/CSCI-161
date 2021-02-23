@@ -1,20 +1,14 @@
-/*
- * A collection of objects that are inserted and removed according to the last-in
- ∗ first-out principle. Although similar in purpose, this interface differs from
- ∗ java.util.Stack.
- ∗
- ∗ @author Michael T. Goodrich
- ∗ @author Roberto Tamassia
- ∗ @author Michael H. Goldwasser
- * Transcribed by 
- * 
- * @author Calvin Stepan
- */
 package lab105.stepancj;
 
 /**
- *
+ * Data Structures & Algorithms 6th Edition 
+ * Goodrich, Tamassia, Goldwasser
+ * Code Fragment 6.1
+ * An implementation of the Stack Interface
+ * Transcribed by 
+ * 
  * @author Calvin Stepan
+ * @version 2.23.2021
  * @param <E>
  */
 public interface Stack<E> {
