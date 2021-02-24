@@ -56,7 +56,7 @@ public class Client {
         }
         
         for (int j = 0; j < capacity; j++) {
-            System.out.printf("\n" + tableFormat + "\n");
+            System.out.printf("%n" + tableFormat + "%n");
             for (int i = 0; i < capacity; i++) {
                 if(i == 0) 
                 System.out.printf("|  %,9d  |", array[j][i]);
@@ -64,6 +64,6 @@ public class Client {
                 System.out.printf("  %,9d  |", array[j][i]);
             }
         }
-        System.out.printf("\n" + tableFormat + "\n");
+        System.out.printf("%n" + tableFormat + "%n");
     }
 }
