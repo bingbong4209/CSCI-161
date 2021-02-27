@@ -32,7 +32,8 @@ public class ArrayStack<E> implements Stack<E> {
     public boolean isEmpty() {
         return (t == -1); 
     }
- public void push(E e) throws IllegalStateException {
+    
+    public void push(E e) throws IllegalStateException {
         if (size() == data.length) {
             throw new IllegalStateException("Stack is full");
         }
