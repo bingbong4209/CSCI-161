@@ -12,10 +12,23 @@ public class Client {
     static Random rand = new Random();
 
     public static void main(String[] args) {
-
-        int maxN = 10000;
+        
+        int maxN = 1000000000;
         int capacity = 6;
         long[][] times = new long[capacity][capacity];
+
+        int row = 0;
+        for (int i = 10; i < maxN && row < capacity; i *= 10) {
+            times[row][0] = i;
+            times[row][1] = testArrayStack(i);
+            times[row][2] = testLinkedStack(i);
+            times[row][3] = testArrayQueue(i);
+            times[row][4] = testLinkedQueue(i);
+            times[row][5] = testArrayList(i);
+            row++;
+        }
+
+        AsciiTable.asciiOutput(times);
         /*
         long startTime = 0;
         long stopTime = 0;
@@ -40,19 +53,6 @@ public class Client {
 
         }
          */
-
-        int row = 0;
-        for (int i = 10; i < maxN; i *= 10) {
-            times[row][0] = i;
-            times[row][1] = testArrayStack(i);
-            times[row][2] = testLinkedStack(i);
-            times[row][3] = testArrayQueue(i);
-            times[row][4] = testLinkedQueue(i);
-            times[row][5] = testArrayList(i);
-            row++;
-        }
-
-        AsciiTable.asciiOutput(times);
     }
 
     public static long testArrayStack(int n) {
@@ -116,13 +116,15 @@ public class Client {
     }
 
     public static long testArrayList(int n) {
-        ArrayList<Integer> list = new ArrayList<>(n);
+        ArrayList<Integer> list = new ArrayList<>();
         long start = System.nanoTime();
         for (int i = 0; i < list.size(); i++) {
             list.add(i, rand.nextInt());
+            System.out.println("made it");
         }
         for (int i = 0; i < list.size(); i++) {
             list.remove(i);
+            System.out.println("made it");
         }
         long stop = System.nanoTime();
         long total = stop - start;

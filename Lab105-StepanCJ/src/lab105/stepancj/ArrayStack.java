@@ -1,23 +1,21 @@
 package lab105.stepancj;
 
 /**
- * Data Structures & Algorithms 6th Edition 
- * Goodrich, Tamassia, Goldwasser
- * Code Fragment 6.2
- * An implementation of the ArrayStack Class
- * This class implements the Stack Interface and uses the array as its container
- * Transcribed by 
- * 
+ * Data Structures & Algorithms 6th Edition Goodrich, Tamassia, Goldwasser Code
+ * Fragment 6.2 An implementation of the ArrayStack Class This class implements
+ * the Stack Interface and uses the array as its container Transcribed by
+ *
  * @author Calvin Stepan
  * @version 2.23.2021
  * @param <E>
  */
 public class ArrayStack<E> implements Stack<E> {
 
-    public static final int CAPACITY = 1000; // default array capacity
+    public static final int CAPACITY = 1000000000; // default array capacity
     private E[] data; // generic array used for storage
     private int t = -1; // index of the top element in stack
- public ArrayStack() {
+
+    public ArrayStack() {
         this(CAPACITY);
     } // constructs stack with default capacity
 
@@ -30,9 +28,9 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     public boolean isEmpty() {
-        return (t == -1); 
+        return (t == -1);
     }
-    
+
     public void push(E e) throws IllegalStateException {
         if (size() == data.length) {
             throw new IllegalStateException("Stack is full");
@@ -57,5 +55,3 @@ public class ArrayStack<E> implements Stack<E> {
         return answer;
     }
 }
-
-

@@ -21,22 +21,45 @@ public class AsciiTable {
 
         int[] columnWidths = new int[capacity];
 
-        String result = "";
-        for (int j = 0; j < capacity; j++) {
-            for (int i = 0; i < capacity; i++) {
+        String result;
+        for (int row = 0; row < capacity; row++) {
+            for (int col = 0; col < capacity; col++) {
+                result = String.format("%,d", array[row][col]);
+                if (columnWidths[col] < result.length()) {
+                    columnWidths[col] = result.length();
+                }
                 /*
                 if(array[j][i] > largestValue)
                     largestValue = array[j][i];
                 if(array[j][i] < smallestValue)
                     smallestValue = array[j][i];
                  */
-                result = String.format("%,d", array[j][i]);
-                if (columnWidths[i] < result.length()) {
-                    columnWidths[i] = (result.length() + 4);
+            }
+        }
+        
+        String lineString = "";
+        for (int row = 0; row < columnWidths.length; row++) {
+            if (row == 0) {
+                lineString = "+";
+            }
+            for (int i = 0; i < columnWidths[row]; i++) {
+                lineString += "-";
+            }
+            lineString += "----";
+            lineString += "+";
+        }
+        
+        for (int row = 0; row < capacity; row++) {
+            System.out.printf("%n" + lineString + "%n");
+            for (int col = 0; col < capacity; col++) {
+                if (col == 0) {
+                    System.out.printf("|  %," + columnWidths[col] + "d  |", array[row][col]);
+                } else {
+                    System.out.printf("  %," + columnWidths[col] + "d  |", array[row][col]);
                 }
             }
-
         }
+        System.out.printf("%n" + lineString + "%n");
         /*
         String largestInt = "" + largestValue;
         String smallestInt = "" + smallestValue;
@@ -56,17 +79,6 @@ public class AsciiTable {
             negative = 1;
          */
 
-        String lineString = "";
-        for (int row = 0; row < columnWidths.length; row++) {
-            if (row == 0) {
-                lineString = "+";
-            }
-            for (int i = 0; i < columnWidths[row]; i++) {
-                lineString += "-";
-            }
-            lineString += "+";
-        }
-
         /*spaces = value.length() + commaCount + negative;
         int lineLength = spaces + 4;
         
@@ -80,20 +92,10 @@ public class AsciiTable {
                 tableFormat += "+";
         }     
          */
-        for (int j = 0; j < capacity; j++) {
-            System.out.printf("%n" + lineString + "%n");
-            for (int i = 0; i < capacity; i++) {
-                if (i == 0) {
-                    System.out.printf("|  %," + columnWidths[i] + "d  |", array[j][i]);
-                } else {
-                    System.out.printf("  %," + columnWidths[i] + "d  |", array[j][i]);
-                }
-            }
-        }
-        System.out.printf("%n" + lineString + "%n");
+        
     }
 
-    public static void addTime(int index1, int index2, long time, long[][] array) {
-        array[index1][index2] = time;
-    }
+//    public static void addTime(int index1, int index2, long time, long[][] array) {
+//        array[index1][index2] = time;
+//    }
 }
