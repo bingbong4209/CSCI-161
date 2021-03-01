@@ -3,7 +3,10 @@ package lab105.stepancj;
 import java.util.Random;
 
 /**
- *
+ * The client class tests the run times for many different structures adding and removing items from their containers
+ * These include the ArrayQueue, ArrayStack, LinkedQueue, LinkedStack, and ArrayList.
+ * Each is timed in a separate loop and the run time is recorded in nanoseconds
+ * These values are then fed to the asciiOutput() method and returned in an appropriately sized ascii table
  * @author Calvin Stepan
  * @version 2.23.2021
  */
@@ -13,11 +16,13 @@ public class Client {
 
     public static void main(String[] args) {
 
+        //set initial values for test of n = 1 million
         int maxN = 1000000;
         int capacity = 6;
         int columns = 6;
         long[][] times = new long[capacity][columns];
 
+        //use methods to calculate times 
         int row = 0;
         for (int i = 10; i <= maxN && row < capacity; i *= 10) {
             times[row][0] = i;
@@ -31,6 +36,7 @@ public class Client {
         row = 0;
         AsciiTable.asciiOutput(times);
         
+        //reset and get ready for n = 100 million, as 1 billion runs my system out of memory
         capacity = 8;
         long[][] times2 = new long[capacity][columns];
         maxN = 100000000;
@@ -44,9 +50,13 @@ public class Client {
             row++;
         }
         AsciiTable.asciiOutput(times2);
-
     }
 
+    /**
+     * 
+     * @param n an integer representing the n value given above in the loop, where n increases by 10
+     * @return a long representing the total run time 
+     */
     public static long testArrayStack(int n) {
         ArrayStack<Integer> stack = new ArrayStack<>();
         long start = System.nanoTime();
@@ -63,6 +73,11 @@ public class Client {
         return total;
     }
 
+    /**
+     * 
+     * @param n an integer representing the n value given above in the loop, where n increases by 10
+     * @return a long representing the total run time 
+     */
     public static long testLinkedStack(int n) {
         LinkedStack<Integer> stack = new LinkedStack<>();
         long start = System.nanoTime();
@@ -78,6 +93,11 @@ public class Client {
         return total;
     }
 
+    /**
+     * 
+     * @param n an integer representing the n value given above in the loop, where n increases by 10
+     * @return a long representing the total run time 
+     */
     public static long testArrayQueue(int n) {
         ArrayQueue<Integer> queue = new ArrayQueue<>(n);
         long start = System.nanoTime();
@@ -94,6 +114,11 @@ public class Client {
         return total;
     }
 
+    /**
+     * 
+     * @param n an integer representing the n value given above in the loop, where n increases by 10
+     * @return a long representing the total run time 
+     */
     public static long testLinkedQueue(int n) {
         LinkedQueue<Integer> queue = new LinkedQueue<>();
         long start = System.nanoTime();
@@ -109,6 +134,11 @@ public class Client {
         return total;
     }
 
+    /**
+     * 
+     * @param n an integer representing the n value given above in the loop, where n increases by 10
+     * @return a long representing the total run time 
+     */
     public static long testArrayList(int n) {
         ArrayList<Integer> list = new ArrayList<>(n);
         long start = System.nanoTime();
