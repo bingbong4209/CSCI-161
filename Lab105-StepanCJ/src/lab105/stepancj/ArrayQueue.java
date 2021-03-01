@@ -18,7 +18,7 @@ package lab105.stepancj;
     private E[] data; // generic array used for storage
     private int f = 0; // index of the front element
     private int sz = 0; // current number of elements
-    public static final int CAPACITY = 1000000000; // default array capacity
+    public static final int CAPACITY = 100000; // default array capacity
     // constructors
     public ArrayQueue() {
         this(CAPACITY);//---------Figure out what the initial capacity is

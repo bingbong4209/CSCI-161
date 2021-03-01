@@ -13,10 +13,11 @@ public class AsciiTable {
 
     public static void asciiOutput(long[][] array) {
         int capacity = array[0].length;//tells us how many cells are in the first column of our array
+        int rowCapacity = array.length;
         int[] columnWidths = new int[capacity];
 
         String result;
-        for (int row = 0; row < capacity; row++) {
+        for (int row = 0; row < rowCapacity; row++) {
             for (int col = 0; col < capacity; col++) {
                 result = String.format("%,d", array[row][col]);
                 if (columnWidths[col] < result.length()) {
@@ -37,7 +38,7 @@ public class AsciiTable {
             lineString += "+";
         }
         
-        for (int row = 0; row < capacity; row++) {
+        for (int row = 0; row < rowCapacity; row++) {
             System.out.printf("%n" + lineString + "%n");
             for (int col = 0; col < capacity; col++) {
                 if (col == 0) {

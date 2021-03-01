@@ -11,7 +11,7 @@ package lab105.stepancj;
  */
 public class ArrayStack<E> implements Stack<E> {
 
-    public static final int CAPACITY = 1000000000; // default array capacity
+    public static final int CAPACITY = 100000000; // default array capacity
     private E[] data; // generic array used for storage
     private int t = -1; // index of the top element in stack
 

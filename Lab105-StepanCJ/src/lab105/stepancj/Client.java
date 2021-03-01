@@ -15,19 +15,20 @@ public class Client {
         
         int maxN = 100000000;
         int capacity = 8;
-        long[][] times = new long[capacity][capacity];
+        long[][] times = new long[capacity][6];
 
         int row = 0;
-        for (int i = 10; i < maxN && row < capacity; i *= 10) {
+        for (int i = 10; i <= maxN && row < capacity; i *= 10) {
             times[row][0] = i;
-            times[row][1] = testArrayStack(i);
+//            times[row][1] = testArrayStack(i);
             times[row][2] = testLinkedStack(i);
-            times[row][3] = testArrayQueue(i);
-            times[row][4] = testLinkedQueue(i);
-            times[row][5] = testArrayList(i);
+//            times[row][3] = testArrayQueue(i);
+//            times[row][4] = testLinkedQueue(i);
+//            times[row][5] = testArrayList(i);
             row++;
-        }
+    }
         AsciiTable.asciiOutput(times);
+
     }
 
     public static long testArrayStack(int n) {
@@ -39,6 +40,7 @@ public class Client {
         for (int i = 0; i < n; i++) {
             stack.pop();
         }
+        
         long stop = System.nanoTime();
         long total = stop - start;
 
@@ -48,12 +50,13 @@ public class Client {
     public static long testLinkedStack(int n) {
         LinkedStack<Integer> stack = new LinkedStack<>();
         long start = System.nanoTime();
+        System.out.println(n);
         for (int i = 0; i < n; i++) {
             stack.push(rand.nextInt());
         }
-        for (int i = 0; i < n; i++) {
+        /*for (int i = 0; i < n; i++) {
             stack.pop();
-        }
+        }*/
         long stop = System.nanoTime();
         long total = stop - start;
 
@@ -61,8 +64,9 @@ public class Client {
     }
 
     public static long testArrayQueue(int n) {
-        ArrayQueue<Integer> queue = new ArrayQueue<>();
+        ArrayQueue<Integer> queue = new ArrayQueue<>(n);
         long start = System.nanoTime();
+        
         for (int i = 0; i < n; i++) {
             queue.enqueue(rand.nextInt());
         }
