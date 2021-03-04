@@ -3,56 +3,56 @@ package lab106.stepancj;
 import java.util.NoSuchElementException;
 
 /**
+ * The LuckyNumberList class uses a LinkedPositionalList to take in LuckyNumber objects
+ * There are three iterators included in this class: the default, prime, and even
+ * All 3 iterate in different ways
+ * 
  * Data Structures & Algorithms 6th Edition Goodrich, Tamassia, Goldwasser Code
- * Fragment 7.14 Code was cross referenced with the Alphabet class by
- *
+ * Fragment 7.14 
+ * Code was cross referenced with the Alphabet class by
  * @author Joe Latimer
  *
  * Transcribed by
  * @author Calvin Stepan
- * @version 3.3.2021
+ * @version 3.4.2021
  */
 public class LuckyNumberList {
+    //create an empty LinkedPositionalList
+    private LinkedPositionalList<LuckyNumber> luckyList = null; 
 
-    private LinkedPositionalList<LuckyNumber> luckyList = null;
-
+    /**
+     * Default Constructor
+     */
     public LuckyNumberList() {
         luckyList = new LinkedPositionalList<>();
     }
 
+    /**
+     * 
+     * @return the size of the list
+     */
     public int size() {
         return luckyList.size();
     }
     
+    /**
+     * 
+     * @return the first element in the list
+     */
     public LuckyNumber first() {
         if(luckyList.first() == null)
             return null;
         return luckyList.first().getElement();
     }
     
+    /**
+     * 
+     * @param n a LuckyNumber object to be added to the end of the list
+     */
     public void addLuckyNumber(LuckyNumber n) {
         luckyList.addLast(n);
     }
-    //***dash in printf makes things left-justified
-    /**
-     * FIX THIS METHOD PLEASE OR FIGURE OUT IF IT IS NEEDED
-     *
-     * @param luckyNumber
-     * @return
-     */
-    public boolean isPrimeNumber(int luckyNumber) {
-        boolean flag = true;
 
-        
-        
-        for(int i = 1; i < luckyNumber / 2; i++) {
-            if(luckyNumber % i == 0)
-                flag = false;
-        }
-        return flag;
-    }
-
-    //FIND OUT WHY THE TOSTRING METHOD DOES NOT WORK
     @Override
     public String toString() {
         String returnString = "";
@@ -66,15 +66,27 @@ public class LuckyNumberList {
         return returnString;
     }
 
+    /**
+     * 
+     * @param n an int representing the luckyNumber
+     * @return boolean denoting whether or not the luckyNumber parameter it was passed is even
+     */
     public boolean isEven(int n) {
         return (n == 2 || n == 4 || n == 6 || n == 8);
     }
+    
+    /**
+     * 
+     * @param n an int representing the luckyNumber
+     * @return boolean denoting whether or not the luckyNumber parameter it was passed is prime
+     */
     public boolean isPrime(int n) {
         return (n == 1 || n == 2 || n == 3 || n == 5 || n == 7 || n == 9);
     }
     
-    //----- nested PositionIterator class ----------------------------------------------------------------------------------------------
-    private class PositionIterator implements Iterator<Position<LuckyNumber>> {
+    //The default iterator iterates over all the contents in the LinkedPositionalList and does not skip and element
+    //----- nested PositionIterator class -------------------------------------
+    private class DefaultPositionIterator implements Iterator<Position<LuckyNumber>> {
 
         private Position<LuckyNumber> cursor = luckyList.first();   // position of the next element to report
         private Position<LuckyNumber> recent = null;                // position of last reported element
@@ -108,20 +120,21 @@ public class LuckyNumberList {
     } //----- end of nested PositionIterator class -----
 
     //----- nested PositionIterable class -----
-    private class PositionIterable implements Iterable<Position<LuckyNumber>> {
+    private class DefaultPositionIterable implements Iterable<Position<LuckyNumber>> {
 
         @Override
         public Iterator<Position<LuckyNumber>> iterator() {
-            return new PositionIterator();
+            return new DefaultPositionIterator();
         }
     } //----- end of nested PositionIterable class -----
 
     //Returns an iterable representation of the list's positions.
-    public Iterable<Position<LuckyNumber>> positions() {
-        return new PositionIterable();  // create a new instace of the inner class
+    public Iterable<Position<LuckyNumber>> defaultpositions() {
+        return new DefaultPositionIterable();  // create a new instace of the inner class
     }
     
-    //-----------------start of primePositionIterator Class----------------------------------------------------------------------------
+    //The prime iterator iterates over the whole list and checks to see which ones are prime and keeps track of the prime ones
+    //-----------------start of primePositionIterator Class----------------------
     private class primePositionIterator implements Iterator<Position<LuckyNumber>> {
 
         private Position<LuckyNumber> cursor = luckyList.first();   // position of the next element to report
@@ -171,13 +184,14 @@ public class LuckyNumberList {
         public Iterator<Position<LuckyNumber>> iterator() {
             return new primePositionIterator();
         }
-    } //----- end of nested primePositionIterable class ------------------------
+    } //----- end of nested primePositionIterable class ------------------
     
     public Iterable<Position<LuckyNumber>> primePositions() {
         return new primePositionIterable();
-    }//---------------------------------------------------------------------------------------------------------------------------------
+    }
     
-    //-----------------start of evenPositionIterator Class------------------------------------------------------------------------------
+    //The even iterator iterates over the whole list and checks to see which ones are even and keeps track of the even ones
+    //-----------------start of evenPositionIterator Class----------------------
     private class evenPositionIterator implements Iterator<Position<LuckyNumber>> {
 
         private Position<LuckyNumber> cursor = luckyList.first();   // position of the next element to report
@@ -231,5 +245,5 @@ public class LuckyNumberList {
     
     public Iterable<Position<LuckyNumber>> evenPositions() {
         return new evenPositionIterable();
-    }//----------------------------------------------------------------------------------------------------------------------------------
+    }
 }
