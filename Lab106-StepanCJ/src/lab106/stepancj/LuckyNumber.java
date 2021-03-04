@@ -11,7 +11,9 @@ public class LuckyNumber {
 
     String name;
     int luckyNumber;
-    Random rand = new Random(10);
+    String evenOrOdd;
+    String primeOrNot;
+    Random rand = new Random();
 
     /**
      * 
@@ -20,6 +22,14 @@ public class LuckyNumber {
     public LuckyNumber(String name) {
         this.name = name;
         luckyNumber = rand.nextInt(10);
+        if(isPrime(luckyNumber))
+            primeOrNot = "Prime";
+        else
+            primeOrNot = "Not Prime";
+        if(isEven(luckyNumber))
+            evenOrOdd = "Even";
+        else 
+            evenOrOdd = "Odd";
     }
 
     public String getName() {
@@ -32,5 +42,20 @@ public class LuckyNumber {
     
     public String toString() {
         return getClass().getName() + ":" + name + ":" + luckyNumber;
+    }
+    
+    public String getEvenOrOdd() {
+        return evenOrOdd;
+    }
+    
+    public String getPrimeOrNot() {
+        return primeOrNot;
+    }
+    
+    public boolean isEven(int n) {
+        return (n == 2 || n == 4 || n == 6 || n == 8);
+    }
+    public boolean isPrime(int n) {
+        return (n == 1 || n == 2 || n == 3 || n == 5 || n == 7 || n == 9);
     }
 }

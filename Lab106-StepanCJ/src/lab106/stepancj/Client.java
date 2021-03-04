@@ -1,7 +1,9 @@
 package lab106.stepancj;
 
 /**
- * The client class contains the tests of the LuckyNumber and LuckyNumberList classes
+ * The client class contains the tests of the LuckyNumber and LuckyNumberList
+ * classes
+ *
  * @author Calvin Stepan
  * @version 3.3.2021
  */
@@ -12,32 +14,45 @@ public class Client {
      */
     public static void main(String[] args) {
         LuckyNumberList list = new LuckyNumberList();
-        
+
+        list.addLuckyNumber(new LuckyNumber("Lorde"));
         list.addLuckyNumber(new LuckyNumber("James"));
-        list.addLuckyNumber(new LuckyNumber("Jababy"));
-        list.addLuckyNumber(new LuckyNumber("Jeremiah"));
-        list.addLuckyNumber(new LuckyNumber("Jerome"));
-        list.addLuckyNumber(new LuckyNumber("Gerard"));
-        list.addLuckyNumber(new LuckyNumber("Gerald"));
-        list.addLuckyNumber(new LuckyNumber("Harold"));
+        list.addLuckyNumber(new LuckyNumber("Mary"));
+        list.addLuckyNumber(new LuckyNumber("Grandpa"));
+        list.addLuckyNumber(new LuckyNumber("Scat Man"));
+        list.addLuckyNumber(new LuckyNumber("Batman"));
+        list.addLuckyNumber(new LuckyNumber("Robin"));
         list.addLuckyNumber(new LuckyNumber("Steve"));
-        list.addLuckyNumber(new LuckyNumber("Jimmy"));
-        list.addLuckyNumber(new LuckyNumber("Jillian"));
-        
-        //code for the defualt iterator
-        System.out.println("using the default iterator" + list.toString());
-        
-        //code for the prime iterator
+        list.addLuckyNumber(new LuckyNumber("Bing"));
+        list.addLuckyNumber(new LuckyNumber("Cosby"));
+
+        //Code for the Default Iterator(uses the toString() method)
+        Iterator<Position<LuckyNumber>> defaultIterator = list.positions().iterator();
+        System.out.println("Lucky Number List Contents Using The Default Iterator");
+        while (defaultIterator.hasNext()) {
+            printEntry(defaultIterator.next().getElement());
+        }
+
+        //Code for the Prime Iterator
         Iterator<Position<LuckyNumber>> primeIterator = list.primePositions().iterator();
-        while ( primeIterator.hasNext() )
-            System.out.print( primeIterator.next().getElement().toString() + " " );
-        System.out.print( "\n\n" );
-        
-        //code for the even iterator
-         Iterator<Position<LuckyNumber>> evenIterator = list.evenPositions().iterator();
-         while ( evenIterator.hasNext() )
-            System.out.print( evenIterator.next().getElement().toString() + " " );
-        System.out.print( "\n\n" );
+        System.out.println("\nLucky Number List Contents Using The Prime Iterator");
+        while (primeIterator.hasNext()) {
+            printEntry(primeIterator.next().getElement());
+        }
+
+        //Code for the Prime Iterator
+        Iterator<Position<LuckyNumber>> evenIterator = list.evenPositions().iterator();
+        System.out.println("\nLucky Number List Contents Using The Even Iterator");
+        while (evenIterator.hasNext()) {
+            printEntry(evenIterator.next().getElement());
+        }
+
     }
-    
+
+    public static void printEntry(LuckyNumber n) {
+        System.out.printf("%-8s", n.getName());
+        System.out.printf("%5s  ", n.getLuckyNumber());
+        System.out.printf("%-5s \t", n.getEvenOrOdd());
+        System.out.printf("%-10s \n", n.getPrimeOrNot());
+    }
 }

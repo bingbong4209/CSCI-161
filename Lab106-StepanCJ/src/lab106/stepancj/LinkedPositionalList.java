@@ -103,7 +103,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 
     //Returns the first Position in the linked list(or null, if empty)
     public Position<E> first() {
-        return position(header.getPrev());
+        return position(header.getNext());
     }
 
     //Returns the last Position in the linked list(or null, if empty)
@@ -114,13 +114,13 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
     //Returns the Position immediately before Position p(or null, if p is first)
     public Position<E> before(Position<E> p) throws IllegalArgumentException {
         Node<E> node = validate(p);
-        return position(node.getNext());
+        return position(node.getPrev());
     }
     
     //Returns the Position immediately after Position p(or null, if p is first)
     public Position<E> after(Position<E> p) throws IllegalArgumentException {
         Node<E> node = validate(p);
-        return position(node.getPrev());
+        return position(node.getNext());
     }
 
     //private utilities
