@@ -1,5 +1,9 @@
 package lab107.stepancj;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * An abstract base class providing some functionality of the Tree interface
  *
@@ -25,7 +29,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
 
     //Returns the number of levele separating Position p from the root
     public int depth(Position<E> p) {
-        if (isRoot()) {
+        if (isRoot(p)) {
             return 0;
         } else {
             return 1 + depth(parent(p));
