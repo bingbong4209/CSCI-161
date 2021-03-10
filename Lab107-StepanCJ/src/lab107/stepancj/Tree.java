@@ -4,8 +4,11 @@ import java.util.Iterator;
 
 /**
  * An interface for a tree where nodes can have an arbitrary number of children
- *
+ * Code Fragment8.1 from Data Structures and Algorithms, 6th Edition by
+ * Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser 
+ * Transcribed by 
  * @author Calvin Stepan
+ * @version 3.5.2021
  */
 public interface Tree<E> extends Iterable<E> {
 

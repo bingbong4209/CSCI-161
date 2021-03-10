@@ -6,8 +6,11 @@ import java.util.List;
 
 /**
  * An abstract base class providing some functionality of the Tree interface
- *
+ * Code Fragments 8.2, 8.3, 8.5, 8.16-21, 8.23-24 from Data Structures and Algorithms, 6th Edition by
+ * Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser 
+ * Transcribed by 
  * @author Calvin Stepan
+ * @version 3.5.2021
  */
 public abstract class AbstractTree<E> implements Tree<E> {
 
@@ -34,18 +37,6 @@ public abstract class AbstractTree<E> implements Tree<E> {
         } else {
             return 1 + depth(parent(p));
         }
-    }
-
-    //Returns the height of the tree
-    private int heightBad() {               //works, but quadratic worst-case time
-        int h = 0;
-        for (Position<E> p : positions()) {
-            if (isExternal(p)) //only consider lead positions
-            {
-                h = Math.max(h, depth(p));
-            }
-        }
-        return h;
     }
 
     //Returns the height of the subtree rooted at Position p
@@ -100,6 +91,20 @@ public abstract class AbstractTree<E> implements Tree<E> {
             preorderSubtree(root(), snapshot);  //fill the snapshot recursively
         }
         return snapshot;
+    }
+    
+    //Prints preorder representation of subtree of T rooted at p having depth d
+    public static <E> void printPreorderIndent(Tree<E> T, Position<E> p, int d) {
+        System.out.println(spaces(2 * d) + p.getElement());
+        for(Position<E> c: T.children(p))
+            printPreorderIndent(T, c, d + 1);
+    }
+    
+    private static String spaces(int spaces) {
+        String spaceString = "";
+        for(int i = 0; i < spaces; i++)
+            spaceString += " ";
+        return spaceString;
     }
 
     //Adds positions of the subtree rooted at Position p to the given snapshot

@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An abstract base class providing some functionality of the BinaryTree
- * interface
- *
+ * An abstract base class providing some functionality of the BinaryTree interface
+ * Code Fragments 8.7, 8.22 from Data Structures and Algorithms, 6th Edition by
+ * Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser 
+ * Transcribed by 
+ * @author Calvin Stepan
+ * @version 1.9.2021
  * @author Calvin Stepan
  */
 public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements BinaryTree<E> {

@@ -82,7 +82,7 @@ public class LuckyNumber {
      * @param n an int representing the luckyNumber
      * @return boolean denoting whether or not the luckyNumber parameter it was passed is even
      */
-    public boolean isEven(int n) {
+    public static boolean isEven(int n) {
         return (n == 2 || n == 4 || n == 6 || n == 8);
     }
     
@@ -91,7 +91,7 @@ public class LuckyNumber {
      * @param n an int representing the luckyNumber
      * @return boolean denoting whether or not the luckyNumber parameter it was passed is prime
      */
-    public boolean isPrime(int n) {
-        return (n == 1 || n == 2 || n == 3 || n == 5 || n == 7 || n == 9);
+    public static boolean isPrime(int n) {
+        return (n == 2 || n == 3 || n == 5 || n == 7);
     }
 }

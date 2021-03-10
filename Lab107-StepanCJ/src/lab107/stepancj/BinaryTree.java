@@ -2,7 +2,11 @@ package lab107.stepancj;
 
 /**
  * An interface for a binary tree, in which each node has at most two children
+ * Code Fragment 8.6 from Data Structures and Algorithms, 6th Edition by
+ * Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser 
+ * Transcribed by 
  * @author Calvin Stepan
+ * @version 3.5.2021
  */
 public interface BinaryTree<E> extends Tree<E> {
     

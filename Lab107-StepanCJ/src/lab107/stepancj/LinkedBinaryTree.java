@@ -1,8 +1,11 @@
 package lab107.stepancj;
 
 /**
- *
+ * Code Fragments 8.8-8.11, 8.23-24 from Data Structures and Algorithms, 6th Edition by
+ * Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser 
+ * Transcribed by 
  * @author Calvin Stepan
+ * @version 3.9.2021
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     

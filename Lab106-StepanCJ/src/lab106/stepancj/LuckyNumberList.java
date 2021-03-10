@@ -65,24 +65,6 @@ public class LuckyNumberList {
 
         return returnString;
     }
-
-    /**
-     * 
-     * @param n an int representing the luckyNumber
-     * @return boolean denoting whether or not the luckyNumber parameter it was passed is even
-     */
-    public boolean isEven(int n) {
-        return (n == 2 || n == 4 || n == 6 || n == 8);
-    }
-    
-    /**
-     * 
-     * @param n an int representing the luckyNumber
-     * @return boolean denoting whether or not the luckyNumber parameter it was passed is prime
-     */
-    public boolean isPrime(int n) {
-        return (n == 1 || n == 2 || n == 3 || n == 5 || n == 7 || n == 9);
-    }
     
     //The default iterator iterates over all the contents in the LinkedPositionalList and does not skip and element
     //----- nested PositionIterator class -------------------------------------
@@ -151,7 +133,7 @@ public class LuckyNumberList {
         public Position<LuckyNumber> next() throws NoSuchElementException {
             
             if(recent == null) {
-                while(cursor != null && !isPrime(cursor.getElement().luckyNumber))
+                while(cursor != null && !LuckyNumber.isPrime(cursor.getElement().luckyNumber))
                     cursor = luckyList.after(cursor);
             }
             
@@ -161,7 +143,7 @@ public class LuckyNumberList {
             recent = cursor;
             cursor = luckyList.after(cursor);
             
-            while(cursor != null && !isPrime(cursor.getElement().luckyNumber))
+            while(cursor != null && !LuckyNumber.isPrime(cursor.getElement().luckyNumber))
                     cursor = luckyList.after(cursor);
             
             return recent;
@@ -208,7 +190,7 @@ public class LuckyNumberList {
         public Position<LuckyNumber> next() throws NoSuchElementException {
             
             if(recent == null) {
-                while(cursor != null && !isEven(cursor.getElement().luckyNumber))
+                while(cursor != null && !LuckyNumber.isEven(cursor.getElement().luckyNumber))
                     cursor = luckyList.after(cursor);
             }
             
@@ -218,7 +200,7 @@ public class LuckyNumberList {
             recent = cursor;
             cursor = luckyList.after(cursor);
             
-            while(cursor != null && !isEven(cursor.getElement().luckyNumber))
+            while(cursor != null && !LuckyNumber.isEven(cursor.getElement().luckyNumber))
                     cursor = luckyList.after(cursor);
             
             return recent;
