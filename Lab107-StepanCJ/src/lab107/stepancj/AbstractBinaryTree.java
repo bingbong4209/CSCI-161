@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * An abstract base class providing some functionality of the BinaryTree interface
  * Code Fragments 8.7, 8.22 from Data Structures and Algorithms, 6th Edition by
- * Michael T. Goodrich, Roberto Tamassia & Michael H. Goldwasser 
+ * Michael T.Goodrich, Roberto Tamassia &; Michael H. Goldwasser 
  * Transcribed by 
  * @author Calvin Stepan
- * @version 1.9.2021
- * @author Calvin Stepan
+ * @version 3.10.2021
+ * @param <E>
  */
 public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements BinaryTree<E> {
 
@@ -74,5 +74,20 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements B
     // Overrides positions to make inorder the default order for binary trees
     public Iterable<Position<E>> positions() {
         return inorder();
+    }
+    
+    public String eulerTourBinary(Tree<E> T, Position<E> p) {
+        Position<E> parent = parent(p);
+        String printString = "";
+        if(T.isInternal(p))
+            printString += "(";
+        if (p == left(parent)) 
+            /*eulerTourBinary(T, right(parent));
+        System.out.println(p.getElement());
+        if(p == right(parent))
+            eulerTourBinary(T, left(parent));*/
+        if(T.isInternal(p))
+            printString += ")";
+    return printString;
     }
 }
