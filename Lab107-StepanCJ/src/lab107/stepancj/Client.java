@@ -70,8 +70,9 @@ public class Client {
             System.out.printf("%s  \t", breadthfirstTraversal.next().getElement());
         
         System.out.print("\nTree Height:\t\t\t" + finalTree.height(finalTree.root()));
-        System.out.print("\nParenthesized Tree:\t\t\t");
+        System.out.print("\nParenthesized Tree:\t\t");
         
-        System.out.print(finalTree.eulerTourBinary(finalTree, finalTree.root()));
+        finalTree.eulerTourBinary(finalTree, finalTree.root());
+        System.out.println("\n");
     }
 }
