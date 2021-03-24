@@ -13,9 +13,7 @@ public class Client {
      */
     public static void main(String[] args) {
 
-        String filePath = JOptionPane.showInputDialog("Please enter an absolute path");
-        String fileName = JOptionPane.showInputDialog("Please enter a filename");
-        
+        String filePath = JOptionPane.showInputDialog("Please enter an absolute path with a file name");        
     }
     
 }
