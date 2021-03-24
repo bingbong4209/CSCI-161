@@ -80,14 +80,14 @@ public class Recursion {
     }
 
     /**
-     * This is the setup method for Isabel's Technique. It determines if the
-     * file is valid and if it is a power of two. After checking for validity,
-     * it parses the file and puts the contents into an int[] array to be
-     * returned.
+     * This is the setup method for Isabel's Technique.It determines if the file
+     * is valid and if it is a power of two. After checking for validity, it
+     * parses the file and puts the contents into an int[] array to be returned.
      *
      * @param filePath the String representing the path of the file to be
      * scanned
      * @return an int[] array with all the integers from the parsed file
+     * @throws java.io.FileNotFoundException
      */
     public static int[] isabelsTechniqueSetup(String filePath) throws FileNotFoundException {
         System.out.println("File Path: " + filePath);
