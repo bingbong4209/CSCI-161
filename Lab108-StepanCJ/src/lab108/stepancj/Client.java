@@ -17,11 +17,16 @@ public class Client {
 
         String filePath = JOptionPane.showInputDialog("Please enter an absolute path with a file name");
         //for now, use C:\Users\Calvin\Downloads\data.txt
+        //or C:\Users\User\Downloads\data.txt
         //convert it to a file
         try {
             File inputFile = ShuntingYard.stringToFile(filePath);
 
-            ShuntingYard.parseFile(inputFile);
+            ArrayQueue infixQueue = ShuntingYard.parseFile(inputFile);
+            
+            ArrayQueue postfixQueue = ShuntingYard.infixToPostfix(infixQueue);
+            
+            //ShuntingYard.evaluateExpression(postfixQueue);
         } catch (FileNotFoundException fnfe) {
 
         }
