@@ -10,17 +10,30 @@ import java.util.Scanner;
  */
 public class ShuntingYard {
     
-    public static File stringToFile(String filePath) {
+    public static File stringToFile(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         return file;
     }
     
+    private boolean isOperator(String operator) {
+        switch(operator) {
+            case "+":
+                return true;
+            case "-":
+                return true;
+            case "*":
+                return true;
+            case "/":
+                return true;
+            default: 
+                return false;
+        }
+    }
     
-    public static ArrayQueue infixToPostfix(String filePath) throws FileNotFoundException {
-        System.out.println("File Path: " + filePath);
+    public static ArrayQueue parseFile(File inputFile) throws FileNotFoundException {
+        System.out.println("File Path: " + inputFile);
         ArrayQueue infixQueue = new ArrayQueue();
-        ArrayQueue postfixQueue = new ArrayQueue();
-        Scanner scan = new Scanner(new File(filePath));
+        Scanner scan = new Scanner(inputFile);
         while (scan.hasNext()) {
             /**
              * need to repeat the loop for each line but have it stop before it goes to a new line
@@ -31,6 +44,13 @@ public class ShuntingYard {
         }
 
         
+        return infixQueue;
+    }
+    
+    public static ArrayQueue infixToPostfix(ArrayQueue infixQueue) {
+        
+        ArrayQueue postfixQueue = new ArrayQueue();
+        
         return postfixQueue;
     }
     /**
@@ -39,6 +59,8 @@ public class ShuntingYard {
      * -input: infix queue
      * -output: postfix queue
      * evaluate expression
+     * input: postfix queue
+     * output: double, number
      * convert into binary tree
      * run traversals
      */

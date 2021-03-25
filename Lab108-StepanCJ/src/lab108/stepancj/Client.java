@@ -1,5 +1,7 @@
 package lab108.stepancj;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,9 +16,16 @@ public class Client {
     public static void main(String[] args) {
 
         String filePath = JOptionPane.showInputDialog("Please enter an absolute path with a file name");
-        
+        //for now, use C:\Users\Calvin\Downloads\data.txt
         //convert it to a file
-        ShuntingYard.stringToFile(filePath);
+        try {
+            File inputFile = ShuntingYard.stringToFile(filePath);
+
+            ShuntingYard.parseFile(inputFile);
+        } catch (FileNotFoundException fnfe) {
+
+        }
+
     }
-    
+
 }
