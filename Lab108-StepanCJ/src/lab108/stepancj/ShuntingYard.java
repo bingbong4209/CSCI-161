@@ -9,16 +9,17 @@ import java.util.Scanner;
  * @author Calvin Stepan
  */
 public class ShuntingYard {
-
-    public boolean isValid(String expression) {
-        /**
-         * find a way to determine if it is valid or not
-         */
+    
+    public static File stringToFile(String filePath) {
+        File file = new File(filePath);
+        return file;
     }
     
-    public static int[] parseInputFile(String filePath) throws FileNotFoundException {
+    
+    public static ArrayQueue infixToPostfix(String filePath) throws FileNotFoundException {
         System.out.println("File Path: " + filePath);
-
+        ArrayQueue infixQueue = new ArrayQueue();
+        ArrayQueue postfixQueue = new ArrayQueue();
         Scanner scan = new Scanner(new File(filePath));
         while (scan.hasNext()) {
             /**
@@ -27,16 +28,18 @@ public class ShuntingYard {
              */
             String token = scan.next();
 
-            try {
-                int inInt = Integer.parseInt(token);
-                Bag.add(inInt);
-                System.out.println("New int added: " + inInt);
-            } catch (NumberFormatException nfe) {
-                System.out.println("Number Formatting Error");
-            }
         }
 
         
-        return A;
+        return postfixQueue;
     }
+    /**
+     * Take in the file
+     * Convert Infix to Postfix
+     * -input: infix queue
+     * -output: postfix queue
+     * evaluate expression
+     * convert into binary tree
+     * run traversals
+     */
 }

@@ -13,7 +13,10 @@ public class Client {
      */
     public static void main(String[] args) {
 
-        String filePath = JOptionPane.showInputDialog("Please enter an absolute path with a file name");        
+        String filePath = JOptionPane.showInputDialog("Please enter an absolute path with a file name");
+        
+        //convert it to a file
+        ShuntingYard.stringToFile(filePath);
     }
     
 }
