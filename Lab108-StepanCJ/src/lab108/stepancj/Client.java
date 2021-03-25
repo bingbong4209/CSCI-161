@@ -2,6 +2,7 @@ package lab108.stepancj;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,12 +22,20 @@ public class Client {
         //convert it to a file
         try {
             File inputFile = ShuntingYard.stringToFile(filePath);
-
-            ArrayQueue infixQueue = ShuntingYard.parseFile(inputFile);
             
-            ArrayQueue postfixQueue = ShuntingYard.infixToPostfix(infixQueue);
+            Scanner scan = new Scanner(inputFile);
+            while(scan.hasNextLine()) {
+            String expression = scan.nextLine();
             
-            //ShuntingYard.evaluateExpression(postfixQueue);
+            LinkedQueue infixQueue = ShuntingYard.parseFile(expression);
+            
+            LinkedQueue postfixQueue = ShuntingYard.infixToPostfix(infixQueue);
+            
+            double finalAnswer = ShuntingYard.evaluateExpression(postfixQueue);
+            
+            System.out.println(finalAnswer);
+            
+            }
         } catch (FileNotFoundException fnfe) {
 
         }

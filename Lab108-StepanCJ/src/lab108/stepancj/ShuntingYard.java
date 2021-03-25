@@ -33,15 +33,15 @@ public class ShuntingYard {
     private static boolean isOpenGroupingSymbol(String symbol) {
         return symbol.equals("(") || symbol.equals("[");
     }
-    
+
     private static boolean isClosedGroupingSymbol(String symbol) {
         return symbol.equals(")") || symbol.equals("]");
     }
 
-    public static ArrayQueue parseFile(File inputFile) throws FileNotFoundException {
-        System.out.println("File Path: " + inputFile);
-        ArrayQueue<String> infixQueue = new ArrayQueue<>();
-        Scanner scan = new Scanner(inputFile);
+    public static LinkedQueue parseFile(String expression) throws FileNotFoundException {
+        //System.out.println("File Path: " + inputFile);
+        LinkedQueue<String> infixQueue = new LinkedQueue<>();
+        Scanner scan = new Scanner(expression);
 
         while (scan.hasNext()) {
             String token = scan.next();
@@ -51,87 +51,87 @@ public class ShuntingYard {
         return infixQueue;
     }
 
-    public static ArrayQueue infixToPostfix(ArrayQueue<String> infixQueue) {
-        //copy the infixQueue so we don't destroy the actual one in the process
-        ArrayQueue<String> copyQueue = new ArrayQueue<>();
+    public static LinkedQueue infixToPostfix(LinkedQueue<String> infixQueue) {
+        //left queue
+        LinkedQueue<String> postfixQueue = new LinkedQueue<>();
+        //bottom stack
+        LinkedStack<String> stack = new LinkedStack<>();
 
-        //loop to copy the data over
+        //loop to convert the infix to postfix
         int initialSize = infixQueue.size();
         for (int i = 0; i < initialSize; i++) {
             String dequeued = infixQueue.dequeue();
-            copyQueue.enqueue(dequeued);
-        }
-        System.out.println("CopyQueue Size: " + copyQueue.size());
-
-        //left queue
-        ArrayQueue<String> postfixQueue = new ArrayQueue<>();
-        //bottom stack
-        ArrayStack<String> stack = new ArrayStack<>();
-
-        //loop to convert the infix to postfix
-        initialSize = copyQueue.size();
-        for (int i = 0; i < initialSize; i++) {
-            String dequeued = copyQueue.dequeue();
             if (isOperator(dequeued)) {
                 stack.push(dequeued);
             } else if (isOpenGroupingSymbol(dequeued)) {
                 stack.push(dequeued);
-            } else if(!isClosedGroupingSymbol(dequeued)) {
+            } else if (!isClosedGroupingSymbol(dequeued)) {
                 postfixQueue.enqueue(dequeued);
             }
+        }
+        while (!stack.isEmpty()) {
             //remove any grouping symbols and append any operators to the end of the postfix expression
             String pop = stack.pop();
-            String dequeue = copyQueue.dequeue();
+            String dequeue = infixQueue.dequeue();
             try {
                 if (isOperator(pop)) {
-                    postfixQueue.enqueue(pop);
-                } else if(isOpenGroupingSymbol(pop) && isClosedGroupingSymbol(dequeue)){}
-                    
-            } catch (NullPointerException npe) {
-            }
+                postfixQueue.enqueue(pop);
+            } else if (isOpenGroupingSymbol(pop) && isClosedGroupingSymbol(dequeue)) {
+            } else
+                throw new IllegalStateException("Not a valid expression");
+            } catch (NullPointerException npe){}
+            
         }
-        //postfixQueue.enqueue(stack.pop());
         System.out.println("PostfixQueue size: " + postfixQueue.size());
         System.out.println("Stack Size: " + stack.size());
         return postfixQueue;
     }
 
-    public static double evaluateExpression(ArrayQueue<String> postfixQueue) {
+    public static double evaluateExpression(LinkedQueue<String> postfixQueue) {
         double answer = 0;
-        String dequeued = "";
-        ArrayQueue<String> copyQueue = new ArrayQueue<>();
-        //loop to copy the data over
-        int initialSize = postfixQueue.size();
-        for (int i = 0; i < initialSize; i++) {
-            dequeued = postfixQueue.dequeue();
-            copyQueue.enqueue(dequeued);
+        double leftChild;
+        double rightChild;
+        String token;
+        LinkedStack<Double> stack = new LinkedStack();
+
+        while (!postfixQueue.isEmpty()) {
+            token = postfixQueue.dequeue();
+
+            if (!isOperator(token)) {
+                stack.push(Double.parseDouble(token));
+            } else if (isOperator(token)) {
+                rightChild = stack.pop();
+                leftChild = stack.pop();
+                System.out.println("Left Child: " + leftChild);
+                System.out.println("Right Child: " + rightChild);
+                switch (token) {
+                    case "+":
+                        answer = leftChild + rightChild;
+                        break;
+                    case "-":
+                        answer = leftChild - rightChild;
+                        break;
+                    case "*":
+                        answer = leftChild * rightChild;
+                        break;
+                    case "/":
+                        answer = leftChild / rightChild;
+                        break;
+                    default:
+                }
+                System.out.println("Answer: " + answer);
+                stack.push(answer);
+            } else {
+                throw new IllegalStateException("Expression was not valid");
+            }
         }
-        System.out.println("CopyQueue Size: " + copyQueue.size());
-
-        //convert queue into string
-        initialSize = copyQueue.size();
-
-        for (int i = 0; i < initialSize; i++) {
-            dequeued += postfixQueue.dequeue();
-        }
-
-        //put into a tree
-        Scanner scan = new Scanner(dequeued);
-//        while (scan.hasNext()) {
-//            if(isOperator(scan.next()))
-//        }
-
         return answer;
     }
     /**
-     * Take in the file 
-     * Convert Infix to Postfix 
-     * -input: infix queue 
-     * -output: postfix queue
+     * Take in the file Convert Infix to Postfix -input: infix queue -output:
+     * postfix queue
      *
-     * evaluate expression 
-     * input: postfix queue 
-     * output: double, number 
-     * convert into binary tree run traversals
+     * evaluate expression input: postfix queue output: double, number convert
+     * into binary tree run traversals
      */
 }
