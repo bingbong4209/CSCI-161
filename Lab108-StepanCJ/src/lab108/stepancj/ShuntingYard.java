@@ -39,7 +39,6 @@ public class ShuntingYard {
     }
 
     public static LinkedQueue parseFile(String expression) throws FileNotFoundException {
-        //System.out.println("File Path: " + inputFile);
         LinkedQueue<String> infixQueue = new LinkedQueue<>();
         Scanner scan = new Scanner(expression);
 
@@ -54,24 +53,24 @@ public class ShuntingYard {
     public static LinkedQueue infixToPostfix(LinkedQueue<String> infixQueue) {
         //left queue
         LinkedQueue<String> postfixQueue = new LinkedQueue<>();
-        //bottom stack
-        LinkedStack<String> stack = new LinkedStack<>();
+        //bottom binaryStack
+        LinkedStack<String> binaryStack = new LinkedStack<>();
 
         //loop to convert the infix to postfix
         int initialSize = infixQueue.size();
         for (int i = 0; i < initialSize; i++) {
             String dequeued = infixQueue.dequeue();
             if (isOperator(dequeued)) {
-                stack.push(dequeued);
+                binaryStack.push(dequeued);
             } else if (isOpenGroupingSymbol(dequeued)) {
-                stack.push(dequeued);
+                binaryStack.push(dequeued);
             } else if (!isClosedGroupingSymbol(dequeued)) {
                 postfixQueue.enqueue(dequeued);
             }
         }
-        while (!stack.isEmpty()) {
+        while (!binaryStack.isEmpty()) {
             //remove any grouping symbols and append any operators to the end of the postfix expression
-            String pop = stack.pop();
+            String pop = binaryStack.pop();
             String dequeue = infixQueue.dequeue();
             try {
                 if (isOperator(pop)) {
@@ -83,7 +82,7 @@ public class ShuntingYard {
             
         }
         System.out.println("PostfixQueue size: " + postfixQueue.size());
-        System.out.println("Stack Size: " + stack.size());
+        System.out.println("Stack Size: " + binaryStack.size());
         return postfixQueue;
     }
 
@@ -92,16 +91,16 @@ public class ShuntingYard {
         double leftChild;
         double rightChild;
         String token;
-        LinkedStack<Double> stack = new LinkedStack();
+        LinkedStack<Double> binaryStack = new LinkedStack();
 
         while (!postfixQueue.isEmpty()) {
             token = postfixQueue.dequeue();
 
             if (!isOperator(token)) {
-                stack.push(Double.parseDouble(token));
+                binaryStack.push(Double.parseDouble(token));
             } else if (isOperator(token)) {
-                rightChild = stack.pop();
-                leftChild = stack.pop();
+                rightChild = binaryStack.pop();
+                leftChild = binaryStack.pop();
                 System.out.println("Left Child: " + leftChild);
                 System.out.println("Right Child: " + rightChild);
                 switch (token) {
@@ -120,12 +119,45 @@ public class ShuntingYard {
                     default:
                 }
                 System.out.println("Answer: " + answer);
-                stack.push(answer);
+                binaryStack.push(answer);
             } else {
                 throw new IllegalStateException("Expression was not valid");
             }
         }
         return answer;
+    }
+    
+    public static LinkedBinaryTree expressionToTree(LinkedQueue<String> postfixQueue) {
+        System.out.println("Input Queue Size: " + postfixQueue.size());
+        
+        LinkedBinaryTree resultingTree = new LinkedBinaryTree();
+        LinkedBinaryTree leftChild = new LinkedBinaryTree();
+        LinkedBinaryTree rightChild = new LinkedBinaryTree();
+        String token;
+        LinkedStack<LinkedBinaryTree> binaryStack = new LinkedStack();
+
+        while (!postfixQueue.isEmpty()) {
+            token = postfixQueue.dequeue();
+            if (!isOperator(token)) {
+                LinkedBinaryTree temp = new LinkedBinaryTree();
+                temp.addRoot(token);
+                binaryStack.push(temp);
+            } else if (isOperator(token)) {
+                
+                rightChild.addRoot(binaryStack.pop());
+                leftChild.addRoot(binaryStack.pop());
+                
+                Position pos = resultingTree.addRoot(token);
+                
+                resultingTree.attach(pos, leftChild, rightChild);
+                binaryStack.push(resultingTree);
+            } else {
+                throw new IllegalStateException("Expression was not valid");
+            }
+        }
+        System.out.println("Binary Stack Size: " + binaryStack.size());
+        //resultingTree = binaryStack.pop();
+        return resultingTree;
     }
     /**
      * Take in the file Convert Infix to Postfix -input: infix queue -output:

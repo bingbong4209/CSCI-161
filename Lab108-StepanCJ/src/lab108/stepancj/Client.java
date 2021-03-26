@@ -2,6 +2,7 @@ package lab108.stepancj;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -34,6 +35,19 @@ public class Client {
             double finalAnswer = ShuntingYard.evaluateExpression(postfixQueue);
             
             System.out.println(finalAnswer);
+            
+            LinkedQueue temp = ShuntingYard.parseFile(expression);
+            LinkedQueue temp2 = ShuntingYard.infixToPostfix(infixQueue);
+            
+            LinkedBinaryTree expressionTree = ShuntingYard.expressionToTree(temp2);
+            System.out.println(expressionTree.size());
+            
+            Iterator<Position<String>> preorderTraversal = expressionTree.preorder().iterator();
+            Iterator<Position<String>> postorderTraversal = expressionTree.postorder().iterator();
+            Iterator<Position<String>> inorderTraversal = expressionTree.inorder().iterator();
+            while(inorderTraversal.hasNext()) {
+                System.out.printf("%s  \t", inorderTraversal.next().getElement());
+            }
             
             }
         } catch (FileNotFoundException fnfe) {
