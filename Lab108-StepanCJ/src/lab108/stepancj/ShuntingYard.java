@@ -55,17 +55,24 @@ public class ShuntingYard {
         LinkedQueue<String> postfixQueue = new LinkedQueue<>();
         //bottom binaryStack
         LinkedStack<String> binaryStack = new LinkedStack<>();
+        //temp queue
+        LinkedQueue<String> tempQueue = new LinkedQueue<>();//--------------------------------
 
         //loop to convert the infix to postfix
         int initialSize = infixQueue.size();
         for (int i = 0; i < initialSize; i++) {
-            String dequeued = infixQueue.dequeue();
-            if (isOperator(dequeued)) {
-                binaryStack.push(dequeued);
-            } else if (isOpenGroupingSymbol(dequeued)) {
-                binaryStack.push(dequeued);
-            } else if (!isClosedGroupingSymbol(dequeued)) {
-                postfixQueue.enqueue(dequeued);
+            String token = infixQueue.dequeue();
+            
+            //add the token to the temporary queue
+            tempQueue.enqueue(token);//--------------------------------------------------
+            
+            
+            if (isOperator(token)) {
+                binaryStack.push(token);
+            } else if (isOpenGroupingSymbol(token)) {
+                binaryStack.push(token);
+            } else if (!isClosedGroupingSymbol(token)) {
+                postfixQueue.enqueue(token);
             }
         }
         while (!binaryStack.isEmpty()) {
@@ -83,6 +90,17 @@ public class ShuntingYard {
         }
         System.out.println("PostfixQueue size: " + postfixQueue.size());
         System.out.println("Stack Size: " + binaryStack.size());
+        
+        //refill the postfixQueue        
+        System.out.println("Recycled Queue");
+        initialSize = tempQueue.size();
+        for(int i = 0; i < initialSize; i++) {
+            String token = tempQueue.dequeue();//--------------------------------------------
+            postfixQueue.enqueue(token);
+            System.out.print(token + " ");
+        }
+        System.out.println("");
+        
         return postfixQueue;
     }
 
@@ -90,12 +108,18 @@ public class ShuntingYard {
         double answer = 0;
         double leftChild;
         double rightChild;
+        int initialSize;
         String token;
         LinkedStack<Double> binaryStack = new LinkedStack();
-
+        //temp queue
+        LinkedQueue<String> tempQueue = new LinkedQueue<>();
+        
         while (!postfixQueue.isEmpty()) {
             token = postfixQueue.dequeue();
-
+            
+            //add the token to the temporary queue
+            tempQueue.enqueue(token);
+            
             if (!isOperator(token)) {
                 binaryStack.push(Double.parseDouble(token));
             } else if (isOperator(token)) {
@@ -124,6 +148,15 @@ public class ShuntingYard {
                 throw new IllegalStateException("Expression was not valid");
             }
         }
+        //refill the postfixQueue        
+        System.out.println("\nRecycled Queue");
+        initialSize = tempQueue.size();
+        for(int i = 0; i < initialSize; i++) {
+            token = tempQueue.dequeue();//--------------------------------------------
+            postfixQueue.enqueue(token);
+            System.out.print(token + " ");
+        }
+        
         return answer;
     }
     
@@ -135,9 +168,16 @@ public class ShuntingYard {
         LinkedBinaryTree rightChild = new LinkedBinaryTree();
         String token;
         LinkedStack<LinkedBinaryTree> binaryStack = new LinkedStack();
-
+        
+        LinkedQueue<String> tempQueue = new LinkedQueue<>();
+        
         while (!postfixQueue.isEmpty()) {
             token = postfixQueue.dequeue();
+            
+            //add the token to the temporary queue
+            tempQueue.enqueue(token);
+            System.out.println("Token Value: " + token);
+            
             if (!isOperator(token)) {
                 LinkedBinaryTree temp = new LinkedBinaryTree();
                 temp.addRoot(token);
@@ -155,15 +195,39 @@ public class ShuntingYard {
                 throw new IllegalStateException("Expression was not valid");
             }
         }
+        
+        //refill the postfixQueue
+        int intialSize = tempQueue.size();
+        for(int i = 0; i < intialSize; i++) {
+            System.out.println("Postfix Queue Size: " + postfixQueue.size());
+            postfixQueue.enqueue(tempQueue.dequeue());
+        }
+        
         System.out.println("Binary Stack Size: " + binaryStack.size());
         //resultingTree = binaryStack.pop();
         return resultingTree;
     }
-    /**
-     * Take in the file Convert Infix to Postfix -input: infix queue -output:
-     * postfix queue
-     *
-     * evaluate expression input: postfix queue output: double, number convert
-     * into binary tree run traversals
-     */
+    
+    public static LinkedQueue traverseQueue(LinkedQueue<String> queue) {
+        int initialSize = queue.size();
+        LinkedQueue<String> tempQueue = new LinkedQueue<>();
+        
+        System.out.println("Original Queue");
+        for(int i = 0; i < initialSize; i++) {
+            String token = queue.dequeue();
+            System.out.print(token + " ");
+            tempQueue.enqueue(token);
+        }
+        
+        System.out.println("\nRecycled Queue");
+        initialSize = tempQueue.size();
+        for(int i = 0; i < initialSize; i++) {
+            String token = tempQueue.dequeue();
+            queue.enqueue(token);
+            System.out.print(token + " ");
+        }
+        
+        System.out.println("\n" + queue.size());
+        return queue;
+    }
 }

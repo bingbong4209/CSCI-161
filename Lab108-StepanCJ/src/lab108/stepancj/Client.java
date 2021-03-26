@@ -20,26 +20,23 @@ public class Client {
         String filePath = JOptionPane.showInputDialog("Please enter an absolute path with a file name");
         //for now, use C:\Users\Calvin\Downloads\data.txt
         //or C:\Users\User\Downloads\data.txt
-        //convert it to a file
+        
         try {
             File inputFile = ShuntingYard.stringToFile(filePath);
-            
             Scanner scan = new Scanner(inputFile);
+            
             while(scan.hasNextLine()) {
             String expression = scan.nextLine();
             
             LinkedQueue infixQueue = ShuntingYard.parseFile(expression);
-            
+                        
             LinkedQueue postfixQueue = ShuntingYard.infixToPostfix(infixQueue);
             
-            double finalAnswer = ShuntingYard.evaluateExpression(postfixQueue);
+            //double finalAnswer = ShuntingYard.evaluateExpression(postfixQueue);
             
-            System.out.println(finalAnswer);
+            //System.out.println(finalAnswer);
             
-            LinkedQueue temp = ShuntingYard.parseFile(expression);
-            LinkedQueue temp2 = ShuntingYard.infixToPostfix(infixQueue);
-            
-            LinkedBinaryTree expressionTree = ShuntingYard.expressionToTree(temp2);
+            /*LinkedBinaryTree expressionTree = ShuntingYard.expressionToTree(postfixQueue);
             System.out.println(expressionTree.size());
             
             Iterator<Position<String>> preorderTraversal = expressionTree.preorder().iterator();
@@ -48,12 +45,12 @@ public class Client {
             while(inorderTraversal.hasNext()) {
                 System.out.printf("%s  \t", inorderTraversal.next().getElement());
             }
-            
+            */
             }
         } catch (FileNotFoundException fnfe) {
-
+            System.err.println("Invalid File");
         }
-
+        
     }
 
 }
