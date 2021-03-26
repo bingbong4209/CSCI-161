@@ -45,7 +45,6 @@ public class ShuntingYard {
         while (scan.hasNext()) {
             String token = scan.next();
             infixQueue.enqueue(token);
-            System.out.print(token + " ");
         }
         return infixQueue;
     }

@@ -34,18 +34,27 @@ public class Client {
             
             double finalAnswer = ShuntingYard.evaluateExpression(postfixQueue);
             
-            System.out.println( "\nExpression Answer: " + finalAnswer + "\n");
-            /*
+            System.out.println( "\nExpression Answer: " + finalAnswer);
+            
             LinkedBinaryTree expressionTree = ShuntingYard.expressionToTree(postfixQueue);
-            System.out.println(expressionTree.size());
+            System.out.println("Expression Tree Size: " + expressionTree.size());
             
             Iterator<Position<String>> preorderTraversal = expressionTree.preorder().iterator();
             Iterator<Position<String>> postorderTraversal = expressionTree.postorder().iterator();
             Iterator<Position<String>> inorderTraversal = expressionTree.inorder().iterator();
-            while(inorderTraversal.hasNext()) {
-                System.out.printf("%s  \t", inorderTraversal.next().getElement());
-            }
-            */
+            
+            System.out.print("Preorder Traversal:\t");
+            while(preorderTraversal.hasNext())
+                System.out.printf("%s ", preorderTraversal.next().getElement());
+        
+            System.out.print("\nPostorder Traversal:\t");
+            while(postorderTraversal.hasNext())
+                System.out.printf("%s ", postorderTraversal.next().getElement());
+        
+            System.out.print("\nInorder Traversal:\t");
+            while(inorderTraversal.hasNext())
+                System.out.printf("%s ", inorderTraversal.next().getElement());
+            System.out.println("\n");
             }
         } catch (FileNotFoundException fnfe) {
             System.err.println("Invalid File");
