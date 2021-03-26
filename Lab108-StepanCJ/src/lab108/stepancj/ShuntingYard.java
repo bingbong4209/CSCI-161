@@ -31,11 +31,11 @@ public class ShuntingYard {
     }
 
     private static boolean isOpenGroupingSymbol(String symbol) {
-        return symbol.equals("(") || symbol.equals("[");
+        return symbol.equals("(") || symbol.equals("[") || symbol.equals("{");
     }
 
     private static boolean isClosedGroupingSymbol(String symbol) {
-        return symbol.equals(")") || symbol.equals("]");
+        return symbol.equals(")") || symbol.equals("]") || symbol.equals("}");
     }
 
     public static LinkedQueue parseFile(String expression) throws FileNotFoundException {
@@ -45,8 +45,8 @@ public class ShuntingYard {
         while (scan.hasNext()) {
             String token = scan.next();
             infixQueue.enqueue(token);
+            System.out.print(token + " ");
         }
-        System.out.println("InfixQueue size: " + infixQueue.size());
         return infixQueue;
     }
 
@@ -55,18 +55,13 @@ public class ShuntingYard {
         LinkedQueue<String> postfixQueue = new LinkedQueue<>();
         //bottom binaryStack
         LinkedStack<String> binaryStack = new LinkedStack<>();
-        //temp queue
-        LinkedQueue<String> tempQueue = new LinkedQueue<>();//--------------------------------
 
         //loop to convert the infix to postfix
         int initialSize = infixQueue.size();
         for (int i = 0; i < initialSize; i++) {
             String token = infixQueue.dequeue();
-            
-            //add the token to the temporary queue
-            tempQueue.enqueue(token);//--------------------------------------------------
-            
-            
+            infixQueue.enqueue(token);
+
             if (isOperator(token)) {
                 binaryStack.push(token);
             } else if (isOpenGroupingSymbol(token)) {
@@ -81,26 +76,15 @@ public class ShuntingYard {
             String dequeue = infixQueue.dequeue();
             try {
                 if (isOperator(pop)) {
-                postfixQueue.enqueue(pop);
-            } else if (isOpenGroupingSymbol(pop) && isClosedGroupingSymbol(dequeue)) {
-            } else
-                throw new IllegalStateException("Not a valid expression");
-            } catch (NullPointerException npe){}
-            
+                    postfixQueue.enqueue(pop);
+                } else if (isOpenGroupingSymbol(pop) && isClosedGroupingSymbol(dequeue)) {
+                } else {
+                    throw new IllegalStateException("Not a valid expression");
+                }
+            } catch (NullPointerException npe) {
+            }
+
         }
-        System.out.println("PostfixQueue size: " + postfixQueue.size());
-        System.out.println("Stack Size: " + binaryStack.size());
-        
-        //refill the postfixQueue        
-        System.out.println("Recycled Queue");
-        initialSize = tempQueue.size();
-        for(int i = 0; i < initialSize; i++) {
-            String token = tempQueue.dequeue();//--------------------------------------------
-            postfixQueue.enqueue(token);
-            System.out.print(token + " ");
-        }
-        System.out.println("");
-        
         return postfixQueue;
     }
 
@@ -108,25 +92,19 @@ public class ShuntingYard {
         double answer = 0;
         double leftChild;
         double rightChild;
-        int initialSize;
+        int initialSize = postfixQueue.size();
         String token;
         LinkedStack<Double> binaryStack = new LinkedStack();
-        //temp queue
-        LinkedQueue<String> tempQueue = new LinkedQueue<>();
-        
-        while (!postfixQueue.isEmpty()) {
+
+        for (int i = 0; i < initialSize; i++) {
             token = postfixQueue.dequeue();
-            
-            //add the token to the temporary queue
-            tempQueue.enqueue(token);
-            
+            postfixQueue.enqueue(token);
+
             if (!isOperator(token)) {
                 binaryStack.push(Double.parseDouble(token));
             } else if (isOperator(token)) {
                 rightChild = binaryStack.pop();
                 leftChild = binaryStack.pop();
-                System.out.println("Left Child: " + leftChild);
-                System.out.println("Right Child: " + rightChild);
                 switch (token) {
                     case "+":
                         answer = leftChild + rightChild;
@@ -142,91 +120,65 @@ public class ShuntingYard {
                         break;
                     default:
                 }
-                System.out.println("Answer: " + answer);
                 binaryStack.push(answer);
             } else {
                 throw new IllegalStateException("Expression was not valid");
             }
         }
-        //refill the postfixQueue        
-        System.out.println("\nRecycled Queue");
-        initialSize = tempQueue.size();
-        for(int i = 0; i < initialSize; i++) {
-            token = tempQueue.dequeue();//--------------------------------------------
-            postfixQueue.enqueue(token);
-            System.out.print(token + " ");
-        }
-        
+
         return answer;
     }
-    
-    public static LinkedBinaryTree expressionToTree(LinkedQueue<String> postfixQueue) {
-        System.out.println("Input Queue Size: " + postfixQueue.size());
-        
-        LinkedBinaryTree resultingTree = new LinkedBinaryTree();
-        LinkedBinaryTree leftChild = new LinkedBinaryTree();
-        LinkedBinaryTree rightChild = new LinkedBinaryTree();
+
+    public static LinkedBinaryTree<String> expressionToTree(LinkedQueue<String> postfixQueue) {
+        int intialSize = postfixQueue.size();
+        LinkedBinaryTree<String> leftChild;
+        LinkedBinaryTree<String> rightChild;
         String token;
-        LinkedStack<LinkedBinaryTree> binaryStack = new LinkedStack();
-        
-        LinkedQueue<String> tempQueue = new LinkedQueue<>();
-        
-        while (!postfixQueue.isEmpty()) {
+        LinkedStack<LinkedBinaryTree<String>> binaryStack = new LinkedStack<>();
+
+        for (int i = 0; i < intialSize; i++) {
             token = postfixQueue.dequeue();
-            
-            //add the token to the temporary queue
-            tempQueue.enqueue(token);
-            System.out.println("Token Value: " + token);
-            
+            postfixQueue.enqueue(token);
+
             if (!isOperator(token)) {
-                LinkedBinaryTree temp = new LinkedBinaryTree();
+                LinkedBinaryTree<String> temp = new LinkedBinaryTree<>();
                 temp.addRoot(token);
                 binaryStack.push(temp);
             } else if (isOperator(token)) {
-                
-                rightChild.addRoot(binaryStack.pop());
-                leftChild.addRoot(binaryStack.pop());
-                
-                Position pos = resultingTree.addRoot(token);
-                
-                resultingTree.attach(pos, leftChild, rightChild);
-                binaryStack.push(resultingTree);
+                LinkedBinaryTree<String> tempTree = new LinkedBinaryTree<>();
+
+                rightChild = binaryStack.pop();
+                leftChild = binaryStack.pop();
+
+                tempTree.addRoot(token);
+
+                tempTree.attach(tempTree.root(), leftChild, rightChild);
+                binaryStack.push(tempTree);
             } else {
                 throw new IllegalStateException("Expression was not valid");
             }
         }
-        
-        //refill the postfixQueue
-        int intialSize = tempQueue.size();
-        for(int i = 0; i < intialSize; i++) {
-            System.out.println("Postfix Queue Size: " + postfixQueue.size());
-            postfixQueue.enqueue(tempQueue.dequeue());
-        }
-        
-        System.out.println("Binary Stack Size: " + binaryStack.size());
-        //resultingTree = binaryStack.pop();
-        return resultingTree;
+        return binaryStack.pop();
     }
-    
+
     public static LinkedQueue traverseQueue(LinkedQueue<String> queue) {
         int initialSize = queue.size();
         LinkedQueue<String> tempQueue = new LinkedQueue<>();
-        
+
         System.out.println("Original Queue");
-        for(int i = 0; i < initialSize; i++) {
+        for (int i = 0; i < initialSize; i++) {
             String token = queue.dequeue();
             System.out.print(token + " ");
             tempQueue.enqueue(token);
         }
-        
+
         System.out.println("\nRecycled Queue");
         initialSize = tempQueue.size();
-        for(int i = 0; i < initialSize; i++) {
+        for (int i = 0; i < initialSize; i++) {
             String token = tempQueue.dequeue();
             queue.enqueue(token);
             System.out.print(token + " ");
         }
-        
         System.out.println("\n" + queue.size());
         return queue;
     }

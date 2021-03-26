@@ -32,11 +32,11 @@ public class Client {
                         
             LinkedQueue postfixQueue = ShuntingYard.infixToPostfix(infixQueue);
             
-            //double finalAnswer = ShuntingYard.evaluateExpression(postfixQueue);
+            double finalAnswer = ShuntingYard.evaluateExpression(postfixQueue);
             
-            //System.out.println(finalAnswer);
-            
-            /*LinkedBinaryTree expressionTree = ShuntingYard.expressionToTree(postfixQueue);
+            System.out.println( "\nExpression Answer: " + finalAnswer + "\n");
+            /*
+            LinkedBinaryTree expressionTree = ShuntingYard.expressionToTree(postfixQueue);
             System.out.println(expressionTree.size());
             
             Iterator<Position<String>> preorderTraversal = expressionTree.preorder().iterator();
