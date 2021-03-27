@@ -7,8 +7,14 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * This is the client class, which is the culmination of all the work done in the ShuntingYard class
+ * This lab builds off of Lab107-StepanCJ and uses the following classes and interfaces from it:
+ * AbstractBinaryTree, AbstractTree, BinaryTree, LinkedBinaryTree, LinkedQueue, LinkedStack, Position, Queue
+ * SinglyLinkedList, Stack, and Tree
+ * The premise is to prompt the user 
+ * 
  * @author Calvin Stepan
+ * @version 3.27.2021
  */
 public class Client {
 
@@ -19,8 +25,8 @@ public class Client {
 
         String filePath = JOptionPane.showInputDialog("Please enter an absolute path with a file name");
         //for now, use C:\Users\Calvin\Downloads\data.txt
-        //or C:\Users\User\Downloads\data.txt
         
+        //make sure we are given a valid filetype
         try {
             File inputFile = ShuntingYard.stringToFile(filePath);
             Scanner scan = new Scanner(inputFile);
@@ -28,16 +34,17 @@ public class Client {
             while(scan.hasNextLine()) {
             String expression = scan.nextLine();
             
+            System.out.print("Expression Read From File: ");
             LinkedQueue infixQueue = ShuntingYard.parseFile(expression);
-                        
+                      
+            System.out.print("\nPostfix Expression: ");
             LinkedQueue postfixQueue = ShuntingYard.infixToPostfix(infixQueue);
             
             double finalAnswer = ShuntingYard.evaluateExpression(postfixQueue);
             
-            System.out.println( "\nExpression Answer: " + finalAnswer);
+            System.out.println("\nExpression Answer: " + finalAnswer);
             
             LinkedBinaryTree expressionTree = ShuntingYard.expressionToTree(postfixQueue);
-            System.out.println("Expression Tree Size: " + expressionTree.size());
             
             Iterator<Position<String>> preorderTraversal = expressionTree.preorder().iterator();
             Iterator<Position<String>> postorderTraversal = expressionTree.postorder().iterator();
@@ -54,10 +61,13 @@ public class Client {
             System.out.print("\nInorder Traversal:\t");
             while(inorderTraversal.hasNext())
                 System.out.printf("%s ", inorderTraversal.next().getElement());
+            
+            System.out.print("\nEuler's Tour:\t");
+            expressionTree.eulerTourBinary(expressionTree, expressionTree.root());
             System.out.println("\n");
             }
         } catch (FileNotFoundException fnfe) {
-            System.err.println("Invalid File");
+            System.err.println("Invalid File Path");
         }
         
     }

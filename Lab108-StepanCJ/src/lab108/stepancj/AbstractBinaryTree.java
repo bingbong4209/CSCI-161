@@ -76,18 +76,20 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements B
         return inorder();
     }
     
-    public String eulerTourBinary(Tree<E> T, Position<E> p) {
-        Position<E> parent = parent(p);
-        String printString = "";
+    /**
+     * 
+     * @param T the Tree T
+     * @param p the Position p
+     */
+    public void eulerTourBinary(Tree<E> T, Position<E> p) {
         if(T.isInternal(p))
-            printString += "(";
-        if (p == left(parent)) 
-            /*eulerTourBinary(T, right(parent));
-        System.out.println(p.getElement());
-        if(p == right(parent))
-            eulerTourBinary(T, left(parent));*/
+            System.out.print("(");;
+        if (left(p) != null)
+            eulerTourBinary(T, left(p));
+        System.out.print(p.getElement());
+        if(right(p) != null)
+            eulerTourBinary(T, right(p));
         if(T.isInternal(p))
-            printString += ")";
-    return printString;
+            System.out.print(")");
     }
 }

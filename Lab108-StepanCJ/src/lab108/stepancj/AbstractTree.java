@@ -96,7 +96,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
     //Adds positions of the subtree rooted at Position p to the given snapshot
     private void postorderSubtree(Position<E> p, List<Position<E>> snapshot) {
         for (Position<E> c : children(p)) {
-            preorderSubtree(c, snapshot);
+            postorderSubtree(c, snapshot);
         }
         snapshot.add(p);        //for postorder, we add position p after exploring subtrees
     }
