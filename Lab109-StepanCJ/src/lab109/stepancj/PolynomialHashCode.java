@@ -14,4 +14,12 @@ public class PolynomialHashCode {
         }
         return h;
     }
+    
+    public static int madCompression(int hashCode, int N, int p, int a, int b) {
+        int h = 0;
+        
+        
+        
+        return h;
+    }
 }
