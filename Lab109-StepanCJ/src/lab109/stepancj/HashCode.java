@@ -4,13 +4,15 @@ package lab109.stepancj;
  *
  * @author Calvin Stepan
  */
-public class PolynomialHashCode {
+public class HashCode {
 
-    public static int hashCode(String key, int a) {
+    public static int polynomialHashCode(String key, int a) {
         int h = 0;
         for (int i = 0; i < key.length(); i++) {
-            h = (h << 5) | (h >>> 27); // 5-bit cyclic shift of the running sum
-            h += (int) key.charAt(i); // add in next character
+            if(isOddNumber(i))
+                h += (int) key.charAt(i) * a;
+            else
+                h += (int) key.charAt(i);
         }
         return h;
     }
@@ -22,4 +24,9 @@ public class PolynomialHashCode {
         
         return h;
     }
+    
+    public static boolean isOddNumber(int number) {
+        return number % 2 != 0; 
+    }
+    
 }
