@@ -2,6 +2,7 @@ package lab109.stepancj;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -11,43 +12,82 @@ import java.util.Scanner;
 public class Client {
 
     public static void main(String[] args) {
-        ArrayList<Integer> list = new ArrayList<>();
         try {
+            ArrayList<Iterable<Integer>> list = new ArrayList<>();
+            long[][] finalTable = new long[16][3];
             //File wordsDoc = new File("C:\\Users\\Calvin\\Downloads\\words.txt");
-            File wordsDoc = new File("C:\\Users\\User\\Downloads\\words.txt");
-            int a = 33;
-            Scanner scan = new Scanner(wordsDoc);
-            int i = 0;
+            int minA = 30;
+            int maxA = 45;
+            double loadFactor = .5;
 
+            int numCollisions = 0;//total # of collisions
+            int maxCollisions = 0;//max # of collisions for a given key
+
+            Scanner scan = new Scanner(new File("C:\\Users\\Calvin\\Downloads\\words.txt"));
+
+            ArrayList<String> wordList = new ArrayList<>();
+
+            int i = 0;
             while (scan.hasNext()) {
-                String keyValue = scan.next();
-                System.out.println(HashCode.polynomialHashCode(keyValue, a));
-                list.add(i, HashCode.polynomialHashCode(keyValue, a));
+                wordList.add(i, scan.next());
                 i++;
             }
+            System.out.println("Word list size: " + wordList.size());
+            //test for various a values
+            for (int a = minA; a < maxA + 1; a++) {
+                System.out.println("computing using the a value " + a);
+                ArrayList<Entry<Integer, Integer>> hashCollisions = new ArrayList<>();
 
-            for (int j = 0; j < i; j++) {
-                int compare = list.get(j);
-                int counter = 0;
-                for (int k = 0; k < i; k++) {
-                    if (compare == list.get(k)) {
-                        counter++;
+                for (String hashKey : wordList) {
+                    int hashCode = HashCode.polynomialHashCode(hashKey, a);
+
+                    int k;
+                    for (k = 0; k < hashCollisions.size(); k++) {
+                        if (hashCollisions.get(k).getKey().equals(hashCode)) {
+                            break;
+                        }
                     }
-                    //somehow save counter value
-                }
-                System.out.println("collision count: " + counter);
-            }
-        } catch (FileNotFoundException fnfe) {
 
+                    if (k == hashCollisions.size()) {
+                        Entry<Integer, Integer> newCollision = new Entry<>(hashCode, 0);
+                        hashCollisions.add(k, newCollision);
+                    } else {
+                        Entry<Integer, Integer> entry1 = hashCollisions.get(k);
+                        int counter = entry1.getValue();
+                        counter++;
+                        entry1.setValue(counter);
+                        hashCollisions.set(k, entry1);
+                    }
+                }
+                numCollisions = 0;
+                maxCollisions = -1;
+//            System.out.println( "hashCollisons.size() = " + hashCollisions.size() );
+                for (int h = 0; h < hashCollisions.size(); h++) {
+                    Entry<Integer, Integer> entry = hashCollisions.get(h);
+                    int value = entry.getValue();
+                    numCollisions += value;
+                    if (maxCollisions < value) {
+                        maxCollisions = value;
+                    }
+                }
+                    System.out.println("a: " + a + "\tTotal Collisions: " + numCollisions + "\t   Max collisions: " + maxCollisions);
+                    int row = a - 30;
+                    finalTable[row][0] = a;
+                    finalTable[row][1] = numCollisions;
+                    finalTable[row][2] = maxCollisions;
+            }
+            AsciiTable.asciiHeaders();
+            AsciiTable.asciiOutput(finalTable);
+        } catch (FileNotFoundException fnfe) {
         }
+
         //look for at most 6 collisions per value
-        /*
-        System.out.println(HashCode.polynomialHashCode("Stop", 33));
-        list.add(0, HashCode.polynomialHashCode("Stop", 33));
-        System.out.println(HashCode.polynomialHashCode("Tops", 33));
-        list.add(1, HashCode.polynomialHashCode("Tops", 33));
-        System.out.println(HashCode.polynomialHashCode("Pots", 33));
-        list.add(2, HashCode.polynomialHashCode("Pots", 33));
+        /**
+         * column 1: a-value column 2: numCollisions column 3: maxCollisions
          */
+        /**
+         * abstract map unsorted table map word count
+         */
+        //uses the entry class to do the assignment
     }
 }

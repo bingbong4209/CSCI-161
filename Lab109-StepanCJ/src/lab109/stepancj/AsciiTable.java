@@ -1,17 +1,23 @@
 package lab109.stepancj;
 
 /**
- * This is the class where my Ascii Table code is kept. 
- * I use a static method so you only need to import the class, not create an instance of it.
- * 
+ * This is the class where my Ascii Table code is kept. I use a static method so
+ * you only need to import the class, not create an instance of it.
+ *
  * @author Calvin Stepan
  * @version 3.1.2021
  */
 public class AsciiTable {
 
+    public static void asciiHeaders() {
+        System.out.println("+------+----------+------+");
+        System.out.print("|   a  | Total    | Max  |");        
+    }
+
     /**
-     * 
-     * @param array a long[][] array representing runtimes in nanoseconds for various structures
+     *
+     * @param array a long[][] array representing runtimes in nanoseconds for
+     * various structures
      */
     public static void asciiOutput(long[][] array) {
         int capacity = array[0].length;//tells us how many cells are in the first column of our array
@@ -28,7 +34,7 @@ public class AsciiTable {
                 }
             }
         }
-        
+
         //use column data to construct out ascii table lines
         String lineString = "";
         for (int row = 0; row < columnWidths.length; row++) {
@@ -42,6 +48,8 @@ public class AsciiTable {
             lineString += "+";
         }
         
+        //print out headers
+
         //print out the values for each test within the ascii table
         for (int row = 0; row < rowCapacity; row++) {
             System.out.printf("%n" + lineString + "%n");
@@ -53,6 +61,6 @@ public class AsciiTable {
                 }
             }
         }
-        System.out.printf("%n" + lineString + "%n");   
+        System.out.printf("%n" + lineString + "%n");
     }
 }
