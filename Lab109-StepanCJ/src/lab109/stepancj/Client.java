@@ -13,7 +13,8 @@ public class Client {
     public static void main(String[] args) {
         ArrayList<Integer> list = new ArrayList<>();
         try {
-            File wordsDoc = new File("C:\\Users\\Calvin\\Downloads\\words.txt");
+            //File wordsDoc = new File("C:\\Users\\Calvin\\Downloads\\words.txt");
+            File wordsDoc = new File("C:\\Users\\User\\Downloads\\words.txt");
             int a = 33;
             Scanner scan = new Scanner(wordsDoc);
             int i = 0;
