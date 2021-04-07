@@ -7,26 +7,22 @@ package lab109.stepancj;
 public class HashCode {
 
     public static int polynomialHashCode(String key, int a) {
-        int h = 0;
+        int value = 0;
         for (int i = 0; i < key.length(); i++) {
-            if(isOddNumber(i))
-                h += (int) key.charAt(i) * a;
-            else
-                h += (int) key.charAt(i);
+
+            value += (int) key.charAt(i) * (i + a);
         }
-        return h;
+        return value;
     }
-    
+
     public static int madCompression(int hashCode, int N, int p, int a, int b) {
-        int h = 0;
-        
-        
-        
-        return h;
+        int value = 0;
+
+        return value;
     }
-    
+
     public static boolean isOddNumber(int number) {
-        return number % 2 != 0; 
+        return number % 2 != 0;
     }
-    
+
 }
