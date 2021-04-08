@@ -9,8 +9,13 @@ package lab109.stepancj;
  */
 public class AsciiTable {
 
+    /**
+     * make ascii headers method for a table header and column headers
+     * also make a test mode with a predefined file and something to prompt for a file
+     */
     public static void asciiHeaders() {
         System.out.println("+------+----------+------+");
+        System.out.println("|------Polynomial-----|");
         System.out.print("|   a  | Total    | Max  |");        
     }
 

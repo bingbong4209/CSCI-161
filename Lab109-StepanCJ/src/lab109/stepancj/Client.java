@@ -27,12 +27,14 @@ public class Client {
 
             ArrayList<String> wordList = new ArrayList<>();
 
-            int i = 0;
+            //scan in the words to an arrayList
             while (scan.hasNext()) {
-                wordList.add(i, scan.next());
-                i++;
+                wordList.add(scan.next());
             }
+            
             System.out.println("Word list size: " + wordList.size());
+            
+            //Code to create the hash codes and compare collisions
             //test for various a values
             for (int a = minA; a < maxA + 1; a++) {
                 System.out.println("computing using the a value " + a);
@@ -61,7 +63,7 @@ public class Client {
                 }
                 numCollisions = 0;
                 maxCollisions = -1;
-//            System.out.println( "hashCollisons.size() = " + hashCollisions.size() );
+
                 for (int h = 0; h < hashCollisions.size(); h++) {
                     Entry<Integer, Integer> entry = hashCollisions.get(h);
                     int value = entry.getValue();
@@ -78,6 +80,54 @@ public class Client {
             }
             AsciiTable.asciiHeaders();
             AsciiTable.asciiOutput(finalTable);
+            
+            //Code to compress the hash codes and compare collisions
+            //test for various a values
+            for (int a = minA; a < maxA + 1; a++) {
+                System.out.println("computing using the a value " + a);
+                ArrayList<Entry<Integer, Integer>> hashCollisions = new ArrayList<>();
+
+                for (String hashKey : wordList) {
+                    int hashCode = HashCode.polynomialHashCode(hashKey, a);
+
+                    int k;
+                    for (k = 0; k < hashCollisions.size(); k++) {
+                        if (hashCollisions.get(k).getKey().equals(hashCode)) {
+                            break;
+                        }
+                    }
+
+                    if (k == hashCollisions.size()) {
+                        Entry<Integer, Integer> newCollision = new Entry<>(hashCode, 0);
+                        hashCollisions.add(k, newCollision);
+                    } else {
+                        Entry<Integer, Integer> entry1 = hashCollisions.get(k);
+                        int counter = entry1.getValue();
+                        counter++;
+                        entry1.setValue(counter);
+                        hashCollisions.set(k, entry1);
+                    }
+                }
+                numCollisions = 0;
+                maxCollisions = -1;
+
+                for (int h = 0; h < hashCollisions.size(); h++) {
+                    Entry<Integer, Integer> entry = hashCollisions.get(h);
+                    int value = entry.getValue();
+                    numCollisions += value;
+                    if (maxCollisions < value) {
+                        maxCollisions = value;
+                    }
+                }
+                    System.out.println("a: " + a + "\tTotal Collisions: " + numCollisions + "\t   Max collisions: " + maxCollisions);
+                    int row = a - 30;
+                    finalTable[row][0] = a;
+                    finalTable[row][1] = numCollisions;
+                    finalTable[row][2] = maxCollisions;
+            }
+            AsciiTable.asciiHeaders();
+            AsciiTable.asciiOutput(finalTable);
+            
         } catch (FileNotFoundException fnfe) {
         }
 
