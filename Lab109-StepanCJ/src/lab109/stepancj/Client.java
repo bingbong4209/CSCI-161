@@ -23,7 +23,7 @@ public class Client {
             int numCollisions = 0;//total # of collisions
             int maxCollisions = 0;//max # of collisions for a given key
 
-            Scanner scan = new Scanner(new File("C:\\Users\\Calvin\\Downloads\\words.txt"));
+            Scanner scan = new Scanner(new File("C:\\Users\\User\\Downloads\\words.txt"));
 
             ArrayList<String> wordList = new ArrayList<>();
 
