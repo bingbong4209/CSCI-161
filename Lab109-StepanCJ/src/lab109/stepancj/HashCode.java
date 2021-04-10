@@ -13,24 +13,30 @@ public class HashCode {
      * @return
      */
     public static int polynomialHashCode(String key, int a) {
-        int hashCode = 0;
+        long longHashCode = 0;
         for (int i = 0; i < key.length(); i++) {
-
-            hashCode += (int) key.charAt(i) * Math.pow(a, key.length() - (i + 1));
+            long intValue = (int) key.charAt(i);
+            longHashCode += (long) (intValue * Math.pow(a, i));
         }
-        return hashCode;
+        longHashCode = (int) longHashCode;
+        return (int) Math.abs(longHashCode);
     }
-    
+
     /**
-     * 
+     *
      * @param N the size of the bucket array
-     * @return 
+     * @return
      */
     public static int pValueCompute(int N) {
-        int p = 0;
-        
+        int p = N;
         //find the next prime number, then the p values are +/- 5 off of that
-        
+        while(p < N * 2) {
+            N++;
+            for(int i = 2; i < 10; i++) {
+                if(N % i == 0)
+                    break;
+            }
+        }
         return p;
     }
 

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +16,6 @@ public class Client {
         try {
             ArrayList<Iterable<Integer>> list = new ArrayList<>();
             long[][] finalTable = new long[16][3];
-            //File wordsDoc = new File("C:\\Users\\Calvin\\Downloads\\words.txt");
             int minA = 30;
             int maxA = 45;
             double loadFactor = .5;
@@ -23,7 +23,10 @@ public class Client {
             int numCollisions = 0;//total # of collisions
             int maxCollisions = 0;//max # of collisions for a given key
 
-            Scanner scan = new Scanner(new File("C:\\Users\\User\\Downloads\\words.txt"));
+            //String inputFile = JOptionPane.showInputDialog("Please Enter an absolute filepath");
+            //Scanner scan = new Scanner(inputFile);
+            Scanner scan = new Scanner(new File("C:\\Users\\Calvin\\Downloads\\words.txt"));
+            //Scanner scan = new Scanner(new File("C:\\Users\\User\\Downloads\\words.txt"));
 
             ArrayList<String> wordList = new ArrayList<>();
 
@@ -42,7 +45,7 @@ public class Client {
 
                 for (String hashKey : wordList) {
                     int hashCode = HashCode.polynomialHashCode(hashKey, a);
-
+                    
                     int k;
                     for (k = 0; k < hashCollisions.size(); k++) {
                         if (hashCollisions.get(k).getKey().equals(hashCode)) {
@@ -78,9 +81,9 @@ public class Client {
                     finalTable[row][1] = numCollisions;
                     finalTable[row][2] = maxCollisions;
             }
-            AsciiTable.asciiHeaders();
-            AsciiTable.asciiOutput(finalTable);
+            AsciiTable.asciiOutput(finalTable, "HashCode");
             
+            /*
             //Code to compress the hash codes and compare collisions
             //test for various a values
             for (int a = minA; a < maxA + 1; a++) {
@@ -125,10 +128,10 @@ public class Client {
                     finalTable[row][1] = numCollisions;
                     finalTable[row][2] = maxCollisions;
             }
-            AsciiTable.asciiHeaders();
-            AsciiTable.asciiOutput(finalTable);
-            
+            AsciiTable.asciiOutput(finalTable, "Compression");
+            */
         } catch (FileNotFoundException fnfe) {
+            System.err.println(fnfe.toString());
         }
 
         //look for at most 6 collisions per value

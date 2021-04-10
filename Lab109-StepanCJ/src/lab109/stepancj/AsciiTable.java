@@ -1,5 +1,7 @@
 package lab109.stepancj;
 
+import javax.swing.JOptionPane;
+
 /**
  * This is the class where my Ascii Table code is kept. I use a static method so
  * you only need to import the class, not create an instance of it.
@@ -10,29 +12,24 @@ package lab109.stepancj;
 public class AsciiTable {
 
     /**
-     * make ascii headers method for a table header and column headers
-     * also make a test mode with a predefined file and something to prompt for a file
+     * make ascii headers method for a table header and column headers also make
+     * a test mode with a predefined file and something to prompt for a file
      */
-    public static void asciiHeaders() {
-        System.out.println("+------+----------+------+");
-        System.out.println("|------Polynomial-----|");
-        System.out.print("|   a  | Total    | Max  |");        
-    }
-
     /**
      *
-     * @param array a long[][] array representing runtimes in nanoseconds for
+     * @param array a long[][] array representing run times in nanoseconds for
      * various structures
+     * @param tableHeader the String representing the table header
      */
-    public static void asciiOutput(long[][] array) {
-        int capacity = array[0].length;//tells us how many cells are in the first column of our array
+    public static void asciiOutput(long[][] array, String tableHeader) {
+        int columnCount = array[0].length;//tells us how many cells are in the first column of our array
         int rowCapacity = array.length;
-        int[] columnWidths = new int[capacity];
+        int[] columnWidths = new int[columnCount];
 
         //parse each column to find out how wide each needs to be
         String result;
         for (int row = 0; row < rowCapacity; row++) {
-            for (int col = 0; col < capacity; col++) {
+            for (int col = 0; col < columnCount; col++) {
                 result = String.format("%,d", array[row][col]);
                 if (columnWidths[col] < result.length()) {
                     columnWidths[col] = result.length();
@@ -40,7 +37,7 @@ public class AsciiTable {
             }
         }
 
-        //use column data to construct out ascii table lines
+        //use column data to construct ascii table lines
         String lineString = "";
         for (int row = 0; row < columnWidths.length; row++) {
             if (row == 0) {
@@ -52,13 +49,35 @@ public class AsciiTable {
             lineString += "----";
             lineString += "+";
         }
-        
-        //print out headers
 
+        //----Writing Table Headers and Column Headers
+        //variable to store table width
+        int tableWidthLeft = ((lineString.length() - columnCount - 1) / 2) + 4;
+        int tableWidthRight = ((lineString.length() - columnCount - 1) / 2) - 4;
+
+        //print out Table Headers
+        System.out.printf("%n" + lineString + "%n");
+        System.out.printf("| %" + tableWidthLeft + "s" + "%" + tableWidthRight + "s |", tableHeader, "");
+        System.out.printf("%n" + lineString + "%n");
+        //loop to print out the columnHeaders
+        for (int c = 0; c < columnCount; c++) {
+            int count = c + 1;
+            String columnHeader = JOptionPane.showInputDialog("Please Enter a Header For Column " + count);
+            if(columnHeader.length() > 8) {
+                throw new IllegalArgumentException("header was too long");
+            }
+            if (c == 0) {
+                System.out.printf("|  %" + columnWidths[c] + "s  |", columnHeader);
+            } else if (c == columnCount - 1) {
+                System.out.printf("  %" + columnWidths[c] + "s |", columnHeader);
+            } else {
+                System.out.printf("  %" + columnWidths[c] + "s  |", columnHeader);
+            }
+        }
         //print out the values for each test within the ascii table
         for (int row = 0; row < rowCapacity; row++) {
             System.out.printf("%n" + lineString + "%n");
-            for (int col = 0; col < capacity; col++) {
+            for (int col = 0; col < columnCount; col++) {
                 if (col == 0) {
                     System.out.printf("|  %," + columnWidths[col] + "d  |", array[row][col]);
                 } else {
