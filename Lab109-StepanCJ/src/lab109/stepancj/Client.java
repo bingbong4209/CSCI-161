@@ -83,64 +83,19 @@ public class Client {
             }
             AsciiTable.asciiOutput(finalTable, "HashCode");
             
-            /*
             //Code to compress the hash codes and compare collisions
-            //test for various a values
-            for (int a = minA; a < maxA + 1; a++) {
-                System.out.println("computing using the a value " + a);
-                ArrayList<Entry<Integer, Integer>> hashCollisions = new ArrayList<>();
-
-                for (String hashKey : wordList) {
-                    int hashCode = HashCode.polynomialHashCode(hashKey, a);
-
-                    int k;
-                    for (k = 0; k < hashCollisions.size(); k++) {
-                        if (hashCollisions.get(k).getKey().equals(hashCode)) {
-                            break;
-                        }
-                    }
-
-                    if (k == hashCollisions.size()) {
-                        Entry<Integer, Integer> newCollision = new Entry<>(hashCode, 0);
-                        hashCollisions.add(k, newCollision);
-                    } else {
-                        Entry<Integer, Integer> entry1 = hashCollisions.get(k);
-                        int counter = entry1.getValue();
-                        counter++;
-                        entry1.setValue(counter);
-                        hashCollisions.set(k, entry1);
-                    }
-                }
-                numCollisions = 0;
-                maxCollisions = -1;
-
-                for (int h = 0; h < hashCollisions.size(); h++) {
-                    Entry<Integer, Integer> entry = hashCollisions.get(h);
-                    int value = entry.getValue();
-                    numCollisions += value;
-                    if (maxCollisions < value) {
-                        maxCollisions = value;
-                    }
-                }
-                    System.out.println("a: " + a + "\tTotal Collisions: " + numCollisions + "\t   Max collisions: " + maxCollisions);
-                    int row = a - 30;
-                    finalTable[row][0] = a;
-                    finalTable[row][1] = numCollisions;
-                    finalTable[row][2] = maxCollisions;
+            //determine the base p-value
+            int pValue = HashCode.pValueCompute(wordList.size());
+            //test for various p values (in this case, testing for +/- 5 off the p-value
+            for (int p = pValue - 5; p < pValue + 5; p++) {
+                /**
+                 * insert body statement here
+                 */
             }
             AsciiTable.asciiOutput(finalTable, "Compression");
-            */
+            
         } catch (FileNotFoundException fnfe) {
             System.err.println(fnfe.toString());
         }
-
-        //look for at most 6 collisions per value
-        /**
-         * column 1: a-value column 2: numCollisions column 3: maxCollisions
-         */
-        /**
-         * abstract map unsorted table map word count
-         */
-        //uses the entry class to do the assignment
     }
 }

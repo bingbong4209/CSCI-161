@@ -50,7 +50,7 @@ public class AsciiTable {
             lineString += "+";
         }
 
-        //----Writing Table Headers and Column Headers
+        //--------Writing Table Headers and Column Headers--------
         //variable to store table width
         int tableWidthLeft = ((lineString.length() - columnCount - 1) / 2) + 4;
         int tableWidthRight = ((lineString.length() - columnCount - 1) / 2) - 4;
@@ -61,17 +61,30 @@ public class AsciiTable {
         System.out.printf("%n" + lineString + "%n");
         //loop to print out the columnHeaders
         for (int c = 0; c < columnCount; c++) {
-            int count = c + 1;
+            /*int count = c + 1;
             String columnHeader = JOptionPane.showInputDialog("Please Enter a Header For Column " + count);
             if(columnHeader.length() > 8) {
                 throw new IllegalArgumentException("header was too long");
             }
+            
             if (c == 0) {
                 System.out.printf("|  %" + columnWidths[c] + "s  |", columnHeader);
             } else if (c == columnCount - 1) {
                 System.out.printf("  %" + columnWidths[c] + "s |", columnHeader);
             } else {
                 System.out.printf("  %" + columnWidths[c] + "s  |", columnHeader);
+            }
+            */
+            switch(c) {
+                case 0:
+                    System.out.printf("|  %" + columnWidths[c] + "s  |", "a");
+                    break;
+                case 1:
+                    System.out.printf("  %" + columnWidths[c] + "s  |", "total");
+                    break;
+                case 2:
+                    System.out.printf("  %" + columnWidths[c] + "s |", "max");
+                    break;
             }
         }
         //print out the values for each test within the ascii table
