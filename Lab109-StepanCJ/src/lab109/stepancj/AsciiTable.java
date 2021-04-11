@@ -12,10 +12,6 @@ import javax.swing.JOptionPane;
 public class AsciiTable {
 
     /**
-     * make ascii headers method for a table header and column headers also make
-     * a test mode with a predefined file and something to prompt for a file
-     */
-    /**
      *
      * @param array a long[][] array representing run times in nanoseconds for
      * various structures
@@ -50,17 +46,28 @@ public class AsciiTable {
             lineString += "+";
         }
 
+        //loop to make the top line of the table
+        String topLine = "";
+        for(int j = 0; j < lineString.length(); j++) {
+            if(j == 0 || j == lineString.length() - 1)
+                topLine += "+";
+            else
+                topLine += "-";
+        }
+        
         //--------Writing Table Headers and Column Headers--------
-        //variable to store table width
-        int tableWidthLeft = ((lineString.length() - columnCount - 1) / 2) + 4;
-        int tableWidthRight = ((lineString.length() - columnCount - 1) / 2) - 4;
+        //variables to attempt to center the table header
+        int tableWidthLeft = ((lineString.length() - columnCount - 1) / 2) + 5;
+        int tableWidthRight = ((lineString.length() - columnCount - 1) / 2) - 5;
 
-        //print out Table Headers
-        System.out.printf("%n" + lineString + "%n");
+        //print out Table Header
+        System.out.printf("%n" + topLine + "%n");
         System.out.printf("| %" + tableWidthLeft + "s" + "%" + tableWidthRight + "s |", tableHeader, "");
         System.out.printf("%n" + lineString + "%n");
+        
         //loop to print out the columnHeaders
         for (int c = 0; c < columnCount; c++) {
+            //uses user input to create the headers
             /*int count = c + 1;
             String columnHeader = JOptionPane.showInputDialog("Please Enter a Header For Column " + count);
             if(columnHeader.length() > 8) {
@@ -68,22 +75,24 @@ public class AsciiTable {
             }
             
             if (c == 0) {
-                System.out.printf("|  %" + columnWidths[c] + "s  |", columnHeader);
+                System.out.printf("| %-" + columnWidths[c] + "s |", columnHeader);
             } else if (c == columnCount - 1) {
-                System.out.printf("  %" + columnWidths[c] + "s |", columnHeader);
+                System.out.printf(" %-" + columnWidths[c] + "s |", columnHeader);
             } else {
-                System.out.printf("  %" + columnWidths[c] + "s  |", columnHeader);
+                System.out.printf(" %-" + columnWidths[c] + "s |", columnHeader);
             }
             */
+            //predefined column headers
+            int width = columnWidths[c] + 4;
             switch(c) {
                 case 0:
-                    System.out.printf("|  %" + columnWidths[c] + "s  |", "a");
+                    System.out.printf("|%-" + width + "s|", "a/p");
                     break;
                 case 1:
-                    System.out.printf("  %" + columnWidths[c] + "s  |", "total");
+                    System.out.printf("%-" + width + "s|", "total");
                     break;
                 case 2:
-                    System.out.printf("  %" + columnWidths[c] + "s |", "max");
+                    System.out.printf("%-" + width + "s|", "max");
                     break;
             }
         }
