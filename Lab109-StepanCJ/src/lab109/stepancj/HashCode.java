@@ -78,6 +78,7 @@ public class HashCode {
         }
     }
     
+    //Note: this was not used in my final solution; however, this would be the way to randomly compute 'a' and 'b' values
     /**
      * given a p-value and a String indicating if it is an 'a' or 'b' value, we compute a randomly generated 'a' or 'b' value
      * @param p the p-value input
