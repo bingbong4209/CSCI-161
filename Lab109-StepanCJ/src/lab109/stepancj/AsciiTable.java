@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
  * you only need to import the class, not create an instance of it.
  *
  * @author Calvin Stepan
- * @version 3.1.2021
+ * @version 4.10.2021
  */
 public class AsciiTable {
 

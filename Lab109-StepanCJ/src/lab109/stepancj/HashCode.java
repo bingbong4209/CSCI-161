@@ -7,6 +7,7 @@ import java.util.Random;
  * The flow begins with the polynomialHashCode function, followed by the pValueCompute function
  * Finally, we compress the hash keys in the madCompression method
  * @author Calvin Stepan
+ * @version 4.12.2021
  */
 public class HashCode {
 

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  * 2) to compute the compressed hash code values for each word and calculate the number of collisions per word for each of 1 p-values
  * The a-values tested are 30-45, and the p-values tested are 90,816 - 90,826
  * @author Calvin Stepan
+ * @version 4.12.2021
  */
 public class Client {
 

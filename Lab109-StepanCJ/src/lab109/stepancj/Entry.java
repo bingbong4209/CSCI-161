@@ -1,8 +1,9 @@
 package lab109.stepancj;
 
 /**
- *
+ * The Entry class provides functionality to help with the makeshift hash table in the client class
  * @author Calvin Stepan
+ * @version 4.7.2021
  */
 public class Entry<K, V> {
     private K key;
