@@ -37,18 +37,14 @@ public class HashCode {
         OUTER:
         while (p < N * 10) {
             p++;
-            System.out.println("p-value:" + p);
             for (int i = 2; i < p; i++) {
                 if (p % i == 0) {
-                    System.out.println("dud at " + i);
                     break;
                 } else if(i + 1 == p) {
-                    System.out.println("This is a good one: " + p);
                     break OUTER;
                 }
             }
         }
-        System.out.println("p-values are " + (p - 5) + " and " + (p + 5));
         return p;
     }
 

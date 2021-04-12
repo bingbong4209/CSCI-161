@@ -39,12 +39,9 @@ public class Client {
                 wordList.add(scan.next());
             }
 
-            System.out.println("Word list size: " + wordList.size());
-
             //Code to create the hash codes and compare collisions
             //test for various a values
             for (int a = minA; a < maxA + 1; a++) {
-                System.out.println("computing using the a value " + a);
                 ArrayList<Entry<Integer, Integer>> hashCollisions = new ArrayList<>();
 
                 for (String hashKey : wordList) {
@@ -79,7 +76,6 @@ public class Client {
                         maxCollisions = value;
                     }
                 }
-                System.out.println("a: " + a + "\tTotal Collisions: " + numCollisions + "\t   Max collisions: " + maxCollisions);
                 int row = a - 30;
                 finalTable[row][0] = a;
                 finalTable[row][1] = numCollisions;
@@ -117,7 +113,6 @@ public class Client {
             int aValue = 1;
             int bValue = 1;
             for (int p = minP; p <= maxP; p++) {
-                System.out.println("computing using the p value " + p);
                 ArrayList<Entry<Integer, Integer>> hashCollisions = new ArrayList<>();
 
                 for (String hashKey : wordList) {
@@ -156,7 +151,6 @@ public class Client {
                         maxCollisions = value;
                     }
                 }
-                System.out.println("p: " + p + "\tTotal Collisions: " + numCollisions + "\t   Max collisions: " + maxCollisions);
                 int row = p - initialP;
                 compressionTable[row][0] = p;
                 compressionTable[row][1] = numCollisions;
