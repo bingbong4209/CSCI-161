@@ -4,7 +4,7 @@ package lab110.stepancj;
  *
  * @author Calvin Stepan
  */
-public class Lab110StepanCJ {
+public class Client {
 
     /**
      * @param args the command line arguments
