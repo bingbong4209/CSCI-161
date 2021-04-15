@@ -38,15 +38,19 @@ public class Client {
                             response = JOptionPane.showInputDialog("Please enter a positive integer value");
                             
                             option = Integer.parseInt(response);
+                            if(option <= 0) {
+                                response = "abc";
+                                Integer.parseInt(response);
+                            }
                             Recursion.harmonicSetup(option);
                             System.out.println("Input Value: " + option);
                             JOptionPane.showMessageDialog(null, "The Answer is " + Recursion.harmonicComputation(option));
                             int choice = JOptionPane.showConfirmDialog(null, "Would you like to try again?");
                             if (choice == JOptionPane.NO_OPTION) {
                                 tryAgain = false;
-                            }
+                            } 
                         } catch (NumberFormatException nfe) {
-                            System.err.println("Input was not a number");
+                            System.err.println("Input was not a number or not a valid number");
                             int choice = JOptionPane.showConfirmDialog(null, "Invalid response, would you like to try again?");
                             if (choice == JOptionPane.NO_OPTION) {
                                 tryAgain = false;
