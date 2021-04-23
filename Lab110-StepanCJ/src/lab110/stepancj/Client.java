@@ -43,11 +43,11 @@ public class Client {
         //eventually change back to 1 million
         for (int i = randomIterations; i > 0; i--) {
             int number = rand.nextInt(i);
-            System.out.println("index value is " + i);
+            //System.out.println("index value is " + i);
             //if the number has already been passed to the array, we iterate until we get a good value
             for (int j = 0; j < duplicates.size(); j++) {
-                if (duplicates.get(j) == number && duplicates.size() != 0) {
-                    System.out.println("GOT A DUPLICATE at " + number);
+                if (duplicates.get(j) == number && !duplicates.isEmpty()) {
+                    //System.out.println("GOT A DUPLICATE at " + number);
                     number = rand.nextInt(i);
                 }
             }
@@ -60,9 +60,10 @@ public class Client {
             }
             randomTree1.insert(number);
             duplicates.add(number);
-            System.out.println("Next number in the tree is " + number);
+            //System.out.println("Next number in the tree is " + number);
         }
-        //System.out.println(randomTree1.height(randomTree1.root()));
+        randomTree1.eulerTourBinary(randomTree1, randomTree1.root());
+        System.out.println(randomTree1.height(randomTree1.root()));
 
     }
 
