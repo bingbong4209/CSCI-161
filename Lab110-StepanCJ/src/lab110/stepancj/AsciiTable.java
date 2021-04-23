@@ -65,6 +65,7 @@ public class AsciiTable {
         System.out.printf("| %" + tableWidthLeft + "s" + "%" + tableWidthRight + "s |", tableHeader, "");
         System.out.printf("%n" + lineString + "%n");
         
+        
         //loop to print out the columnHeaders
         for (int c = 0; c < columnCount; c++) {
             //uses user input to create the headers
@@ -96,6 +97,8 @@ public class AsciiTable {
                     break;
             }
         }
+        
+        
         //print out the values for each test within the ascii table
         for (int row = 0; row < rowCapacity; row++) {
             System.out.printf("%n" + lineString + "%n");

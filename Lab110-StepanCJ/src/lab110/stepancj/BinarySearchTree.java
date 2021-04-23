@@ -7,7 +7,7 @@ import java.util.Random;
  *
  * @author Calvin Stepan
  * @param <E> generic type E
- * @version 4.20.2021
+ * @version 4.23.2021
  */
 public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 //Represent a node of binary tree  
@@ -101,6 +101,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
                 //If data is less than current's data, node will be inserted to the left of tree  
                 if (data < current.data) {
+                    
                     current = current.left;
                     if (current == null) {
                         parent.left = newNode;
@@ -183,17 +184,19 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         ArrayList<Integer> duplicates = new ArrayList<>();
         Random rand = new Random();
         BinarySearchTree randomTree1 = new BinarySearchTree();
-
+        
         for (int i = 0; i < N; i++) {
-            int number = rand.nextInt(N);
+            int number = rand.nextInt();
 
             //if the number has already been passed to the array, we iterate until we get a good value
             while (duplicates.contains(number)) {
-                number = rand.nextInt(i);
+                number = rand.nextInt();
             }
             randomTree1.insert(number);
             duplicates.add(number);
+            System.out.println(i);
         }
+
         System.out.println(randomTree1.height(randomTree1.root()));
     }
 }

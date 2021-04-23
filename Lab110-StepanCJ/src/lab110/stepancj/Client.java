@@ -3,7 +3,7 @@ package lab110.stepancj;
 /**
  *
  * @author Calvin Stepan
- * @version 4.20.2021
+ * @version 4.23.2021
  */
 public class Client {
 
@@ -12,14 +12,15 @@ public class Client {
      */
     public static void main(String[] args) {
         int setIterations = 8000;
-        int randomIterations = 10000;
-
+        int randomIterations = 100000;
+        long[][] dataTable = new long[5][3];
+        
         BinarySearchTree.ascendingTree(setIterations);
         
         BinarySearchTree.descendingTree(setIterations);
         
-        //for(int i = 0; i < 5; i++)
-            BinarySearchTree.randomTree(randomIterations);
+        for(int i = 0; i < 5; i++)
+            BinarySearchTree.randomTree(randomIterations); 
     }
 
 }
