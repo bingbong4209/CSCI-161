@@ -1,5 +1,8 @@
 package lab110.stepancj;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author Calvin Stepan
@@ -9,7 +12,7 @@ package lab110.stepancj;
 public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 //Represent a node of binary tree  
 
-    private static class Node<E> implements Position<E>{
+    private static class Node<E> implements Position<E> {
 
         private int data;
         private Node left;
@@ -27,35 +30,35 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         public int getData() {
             return data;
         }
-        
+
         public Node getLeft() {
             return left;
         }
-        
+
         public Node getRight() {
             return right;
         }
-        
+
         public Node getParent() {
             return parent;
         }
-        
+
         public void setData(int data) {
             this.data = data;
         }
-        
+
         public void setLeft(Node left) {
             this.left = left;
         }
-        
+
         public void setRight(Node right) {
             this.right = right;
         }
-        
+
         public void setParent(Node parent) {
             this.parent = parent;
         }
-        
+
         @Override
         public E getElement() {
             return element;
@@ -70,11 +73,11 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     public Position<E> root() {
         return root;
     }
-    
+
     public BinarySearchTree() {
         root = null;
     }
-    
+
     @Override
     public int size() {
         return size;
@@ -115,43 +118,82 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         }
     }
 
-    //minNode() will find out the minimum node  
-    public Node minNode(Node root) {
-        if (root.left != null) {
-            return minNode(root.left);
-        } else {
-            return root;
-        }
-    }
-    
     //Returns the Position of p's parent (or null if p is root)
     @Override
     public Position<E> parent(Position<E> p) throws IllegalArgumentException {
         Node<E> node = validate(p);
         return node.getParent();
     }
-    
+
     //Returns the Position of p's left child (or null if no child exists)
     @Override
     public Position<E> left(Position<E> p) throws IllegalArgumentException {
         Node<E> node = validate(p);
         return node.getLeft();
     }
-    
+
     //Returns the Position of p's right child (or null if no child exists)
     @Override
     public Position<E> right(Position<E> p) throws IllegalArgumentException {
         Node<E> node = validate(p);
         return node.getRight();
     }
-    
+
     //Validates the position and returns it as a node
     protected Node<E> validate(Position<E> p) throws IllegalArgumentException {
-        if(!(p instanceof Node))
+        if (!(p instanceof Node)) {
             throw new IllegalArgumentException("Not valid position type");
-        Node<E> node = (Node<E>)p;          //safe cast
-        if(node.getParent() == node)
+        }
+        Node<E> node = (Node<E>) p;          //safe cast
+        if (node.getParent() == node) {
             throw new IllegalArgumentException("p is no longer in the tree");
+        }
         return node;
+    }
+
+    /**
+     *
+     * @param N the number of elements to include
+     */
+    public static void ascendingTree(int N) {
+        BinarySearchTree ascendingTree = new BinarySearchTree();
+        for (int i = 0; i < N; i++) {
+            ascendingTree.insert(i);
+        }
+        System.out.println(ascendingTree.height(ascendingTree.root()));
+    }
+
+    /**
+     *
+     * @param N the number of elements to include
+     */
+    public static void descendingTree(int N) {
+        BinarySearchTree descendingTree = new BinarySearchTree();
+        for (int i = N; i > 0; i--) {
+            descendingTree.insert(i);
+        }
+        System.out.println(descendingTree.height(descendingTree.root()));
+    }
+
+    /**
+     *
+     * @param N the number of elements to include
+     */
+    public static void randomTree(int N) {
+        ArrayList<Integer> duplicates = new ArrayList<>();
+        Random rand = new Random();
+        BinarySearchTree randomTree1 = new BinarySearchTree();
+
+        for (int i = 0; i < N; i++) {
+            int number = rand.nextInt(N);
+
+            //if the number has already been passed to the array, we iterate until we get a good value
+            while (duplicates.contains(number)) {
+                number = rand.nextInt(i);
+            }
+            randomTree1.insert(number);
+            duplicates.add(number);
+        }
+        System.out.println(randomTree1.height(randomTree1.root()));
     }
 }
