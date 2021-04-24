@@ -62,7 +62,7 @@ public class AsciiTable {
 
         //print out Table Header
         System.out.printf("%n" + topLine + "%n");
-        System.out.printf("| %" + tableWidthLeft + "s" + "%" + tableWidthRight + "s |", tableHeader, "");
+        System.out.printf("|%" + tableWidthLeft + "s" + "%" + tableWidthRight + "s |", tableHeader, "");
         System.out.printf("%n" + lineString + "%n");
         
         
@@ -87,13 +87,10 @@ public class AsciiTable {
             int width = columnWidths[c] + 4;
             switch(c) {
                 case 0:
-                    System.out.printf("|%-" + width + "s|", "a/p");
+                    System.out.printf("|%-" + width + "s|", "N");
                     break;
                 case 1:
-                    System.out.printf("%-" + width + "s|", "total");
-                    break;
-                case 2:
-                    System.out.printf("%-" + width + "s|", "max");
+                    System.out.printf("%-" + width + "s|", "Height");
                     break;
             }
         }
