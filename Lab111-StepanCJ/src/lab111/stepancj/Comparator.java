@@ -4,6 +4,6 @@ package lab111.stepancj;
  *
  * @author Calvin Stepan
  */
-public interface Comparator<E> {
-    public int compare(E e1, E e2);
+public interface Comparator<K> {
+    public int compare(K k1, K k2);
 }

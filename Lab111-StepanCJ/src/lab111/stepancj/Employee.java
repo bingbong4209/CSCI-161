@@ -1,6 +1,5 @@
 package lab111.stepancj;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -65,6 +64,18 @@ public class Employee {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     *
+     * @return the unicode value of the given name
+     */
+    public int getNameValue() {
+        int temp = 0;
+        for (int i = 0; i < name.length(); i++) {
+            temp += name.charAt(i);
+        }
+        return temp;
     }
 
     /**
@@ -158,14 +169,4 @@ public class Employee {
         }
         return temp;
     }
-
-    /*
-    public static void main(String[] args) {
-        ArrayList<Employee> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new Employee());
-            //System.out.println(list.get(i).getName() + "\t" + list.get(i).getId() + "\t" + list.get(i).getDept() + "\t" + list.get(i).getHired());
-        }
-    }
-     */
 }
