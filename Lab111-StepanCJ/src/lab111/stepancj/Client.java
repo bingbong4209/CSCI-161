@@ -33,7 +33,7 @@ public class Client {
         //sort on id using the bubble sort (both types)
         //simple bubble sort
         start = System.currentTimeMillis();
-        Employee[] simpleBubbleArray = Sort.simpleBubbleSort(employeeArray);
+        Sort.simpleBubbleSort(employeeArray);
         //Sort.printArray(simpleBubbleArray);
         end = System.currentTimeMillis();
         runTime = end - start;
@@ -42,7 +42,7 @@ public class Client {
         
         //enhanced bubble sort
         start = System.currentTimeMillis();
-        Employee[] enhancedBubbleArray = Sort.simpleBubbleSort(employeeArray);
+        Sort.simpleBubbleSort(employeeArray);
         //Sort.printArray(enhancedBubbleArray);
         end = System.currentTimeMillis();
         runTime = end - start;
