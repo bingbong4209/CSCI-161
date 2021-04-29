@@ -13,17 +13,27 @@ public class Sort<K> implements Comparator<K> {
 
     //fix this later
     @Override
-    public int compare(K k1, K k2) {
-        return 1;
+    public int compare(Object k1, Object k2) {
+        if(k1.equals(k2))
+            return 1;
+        else if(k1.equals(k2))
+            return 0;
+        else 
+            return -1;
     }
-    
+
+    /**
+     * 
+     * @param <K> generic type K
+     * @param array input array to be sorted
+     */
     public static <K> void simpleBubbleSort(K[] array) {
         K[] sortedArray = (K[]) new Object[array.length];
         for (int i = 0; i < array.length; i++) {
             sortedArray[i] = array[i];
         }
-        K k1 = sortedArray[0];
-        for (int k = 0; k < array.length; k++) {
+
+        for (K array1 : array) {
             for (int j = 0; j < array.length - 1; j++) {
                 if (compare(sortedArray[j], sortedArray[j + 1]) == 1) {
                     K temp = sortedArray[j];
@@ -34,43 +44,28 @@ public class Sort<K> implements Comparator<K> {
         }
     }
 
-    /*
-    public static Employee[] simpleBubbleSort(Employee[] array) {
-        Employee[] sortedArray = new Employee[array.length];
-        for (int i = 0; i < array.length; i++) {
-            sortedArray[i] = array[i];
-        }
-
-        for (Employee array1 : array) {
-            for (int j = 0; j < array.length - 1; j++) {
-                if (EmployeeComparator.idCompare(sortedArray[j], sortedArray[j + 1]) == 1) {
-                    Employee temp = sortedArray[j];
-                    sortedArray[j] = sortedArray[j + 1];
-                    sortedArray[j + 1] = temp;
-                }
-            }
-        }
-        return sortedArray;
-    }
+    /**
+     * 
+     * @param <K> generic type K
+     * @param array input array to be sorted
      */
-    
-    public static Employee[] enhancedBubbleSort(Employee[] array) {
-        Employee[] sortedArray = new Employee[array.length];
+    public static <K> void enhancedBubbleSort(K[] array) {
+        K[] sortedArray = (K[]) new Object[array.length];
         for (int i = 0; i < array.length; i++) {
             sortedArray[i] = array[i];
         }
 
-        for (Employee array1 : array) {
+        for (K array1 : array) {
             for (int j = 0; j < array.length - j - 1; j++) {
-                if (EmployeeComparator.idCompare(sortedArray[j], sortedArray[j + 1]) == 1) {
-                    Employee temp = sortedArray[j];
+                if (compare(sortedArray[j], sortedArray[j + 1]) == 1) {
+                    K temp = sortedArray[j];
                     sortedArray[j] = sortedArray[j + 1];
                     sortedArray[j + 1] = temp;
                 }
             }
         }
-        return sortedArray;
     }
+
     /*
     public static <K> void mergeSort(K[] S, Comparator<K> comp) {
         int n = S.length;
@@ -88,18 +83,57 @@ public class Sort<K> implements Comparator<K> {
         //merge results
         merge(S1, S2, S, comp);
     }
-    */
-    public static Employee[] quickSort(Employee[] array) {
-        return array;
+     */
+
+    /**
+     *
+     * @param <K> generic type K
+     * @param S the input queue to be sorted
+     * @param comp the comparator to compare the two adjacent elements
+     */
+    public static <K> void quickSort(Queue<K> S, Comparator<K> comp) {
+        int n = S.size();
+        if (n < 2) {
+            return;                             //if the queue is trivially sorted
+        }        
+        //divide
+        K pivot = S.first();
+        Queue<K> L = new LinkedQueue<>();
+        Queue<K> E = new LinkedQueue<>();
+        Queue<K> G = new LinkedQueue<>();
+        while (!S.isEmpty()) {                  //divide original int L, E, and G     
+            K element = S.dequeue();
+            int c = comp.compare(element, pivot);
+            if (c < 0) {
+                L.enqueue(element);
+            } else if (c == 0) {
+                E.enqueue(element);
+            } else {
+                G.enqueue(element);
+            }
+        }
+        //conquer
+        quickSort(L, comp);
+        quickSort(G, comp);
+        //concatenate resutls
+        while (!L.isEmpty()) {
+            S.enqueue(L.dequeue());
+        }
+        while (!E.isEmpty()) {
+            S.enqueue(E.dequeue());
+        }
+        while (!G.isEmpty()) {
+            S.enqueue(G.dequeue());
+        }
     }
 
     public static Employee[] radixSort(Employee[] array) {
         return array;
     }
 
-    public static void printArray(Employee[] array) {
+    public static <K> void printArray(K[] array) {
         for (int j = 0; j < array.length - 1; j++) {
-            System.out.println(array[j].getId());
+            System.out.println(array[j].to);
         }
     }
 
