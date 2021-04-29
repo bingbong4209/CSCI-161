@@ -9,26 +9,16 @@ package lab111.stepancj;
  * @version 4.29.2021
  * @param <K> generic type K
  */
-public class Sort<K> implements Comparator<K> {
-
-    //fix this later
-    @Override
-    public int compare(Object k1, Object k2) {
-        if(k1.equals(k2))
-            return 1;
-        else if(k1.equals(k2))
-            return 0;
-        else 
-            return -1;
-    }
+public class Sort<K> {
 
     /**
      * 
      * @param <K> generic type K
      * @param array input array to be sorted
+     * @param comp the comparator used to compared the two objects
      */
-    /*
-    public static <K> void simpleBubbleSort(K[] array) {
+    
+    public static <K> void simpleBubbleSort(K[] array, Comparator<K> comp) {
         K[] sortedArray = (K[]) new Object[array.length];
         for (int i = 0; i < array.length; i++) {
             sortedArray[i] = array[i];
@@ -36,7 +26,7 @@ public class Sort<K> implements Comparator<K> {
 
         for (K array1 : array) {
             for (int j = 0; j < array.length - 1; j++) {
-                if (compare(sortedArray[j], sortedArray[j + 1]) == 1) {
+                if (comp.compare(sortedArray[j], sortedArray[j + 1]) == 1) {
                     K temp = sortedArray[j];
                     sortedArray[j] = sortedArray[j + 1];
                     sortedArray[j + 1] = temp;
@@ -44,7 +34,7 @@ public class Sort<K> implements Comparator<K> {
             }
         }
     }
-    */
+    
     /**
      * 
      * @param <K> generic type K
@@ -55,7 +45,6 @@ public class Sort<K> implements Comparator<K> {
         LinkedQueue<K> newQueue = new LinkedQueue<>();
         for(K index: array) {
             newQueue.enqueue(index);
-            System.out.println(index);
         }
         return newQueue;
     }
@@ -65,8 +54,8 @@ public class Sort<K> implements Comparator<K> {
      * @param <K> generic type K
      * @param array input array to be sorted
      */
-    /*
-    public static <K> void enhancedBubbleSort(K[] array) {
+    
+    public static <K> void enhancedBubbleSort(K[] array, Comparator<K> comp) {
         K[] sortedArray = (K[]) new Object[array.length];
         for (int i = 0; i < array.length; i++) {
             sortedArray[i] = array[i];
@@ -74,7 +63,7 @@ public class Sort<K> implements Comparator<K> {
 
         for (K array1 : array) {
             for (int j = 0; j < array.length - j - 1; j++) {
-                if (compare(sortedArray[j], sortedArray[j + 1]) == 1) {
+                if (comp.compare(sortedArray[j], sortedArray[j + 1]) == 1) {
                     K temp = sortedArray[j];
                     sortedArray[j] = sortedArray[j + 1];
                     sortedArray[j + 1] = temp;
@@ -83,7 +72,7 @@ public class Sort<K> implements Comparator<K> {
         }
     }
 
-    /*
+    
     public static <K> void mergeSort(K[] S, Comparator<K> comp) {
         int n = S.length;
         //if array is trivially sorted
@@ -91,7 +80,7 @@ public class Sort<K> implements Comparator<K> {
             return;
         }
         int mid = n / 2;
-        //change these 
+        /*----------------------------------------------------change these 
         K[] S1 = Arrays.copyOfRange(S, 0, mid); //first half copy
         K[] S2 = Arrays.copyOfRange(S, mid, n); //second half copy
         //use recursion to sort
@@ -99,8 +88,9 @@ public class Sort<K> implements Comparator<K> {
         mergeSort(S2, comp);
         //merge results
         merge(S1, S2, S, comp);
+        */
     }
-     */
+     
 
     /**
      *
@@ -154,7 +144,7 @@ public class Sort<K> implements Comparator<K> {
         }
     }
 
-    public static <K> void merge(K[] S1, K[] S2, K[] S, Comparator<K> comp) {
+    private static <K> void merge(K[] S1, K[] S2, K[] S, Comparator<K> comp) {
         int i = 0, j = 0;
         while (i + j < S.length) {
             if (j == S2.length || (i < S1.length && comp.compare(S1[i], S2[i]) < 0)) {

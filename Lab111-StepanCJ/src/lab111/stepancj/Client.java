@@ -13,9 +13,8 @@ public class Client {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        long start;
-        long end;
-        long runTime;
+        long start, end, runTime;
+        
         //initial employee array setup
         int size = 5000;
         Employee[] employeeArray = new Employee[size];
@@ -23,30 +22,42 @@ public class Client {
             employeeArray[i] = new Employee();
         }
         long[][] sortRunTimes = new long[1][4]; 
-        //Sort.printArray(employeeArray);
-        //System.out.println("\n\n");
         
         //sort on name using the merge sort
+        Comparator<Employee> mergeCompare = new NameComparator();
+        start = System.currentTimeMillis();
+        Sort.mergeSort(employeeArray, mergeCompare);
+        end = System.currentTimeMillis();
+        runTime = end - start;
+        System.out.println("Merge Sort Run Time: " + runTime);
         
         //sort on dept using the quick sort
+        Comparator<Employee> quickCompare = new DeptComparator();
+        LinkedQueue<Employee> employeeQueue = Sort.arrayToQueue(employeeArray);
+        start = System.currentTimeMillis();
+        Sort.quickSort(employeeQueue, quickCompare);
+        end = System.currentTimeMillis();
+        runTime = end - start;
+        System.out.println("Quick Sort Run Time: " + runTime);
         
         //sort on id using the bubble sort (both types)
         //simple bubble sort
+        Comparator<Employee> bubbleCompare = new IDComparator();
         start = System.currentTimeMillis();
-        Sort.simpleBubbleSort(employeeArray);
-        //Sort.printArray(simpleBubbleArray);
+        Sort.simpleBubbleSort(employeeArray, bubbleCompare);
         end = System.currentTimeMillis();
         runTime = end - start;
         sortRunTimes[0][3] = runTime;
-        System.out.println("Run Time: " + runTime + "\n\n");
+        System.out.println("Simple Bubble SortRun Time: " + runTime);
         
         //enhanced bubble sort
+        Comparator<Employee> betterBubbleCompare = new IDComparator();
         start = System.currentTimeMillis();
-        Sort.simpleBubbleSort(employeeArray);
-        //Sort.printArray(enhancedBubbleArray);
+        Sort.simpleBubbleSort(employeeArray, betterBubbleCompare);
         end = System.currentTimeMillis();
         runTime = end - start;
-        System.out.println("Run Time: " + runTime);
+        System.out.println("Enhanced Bubble Sort Run Time: " + runTime);
+        
         /**
          * sort using the radix sort
          * All employees are sorted by department
@@ -56,5 +67,6 @@ public class Client {
         
         //Print out the time it takes to run each sort in an ASCII table
     }
-
+        //you can run the n log n sorts at 50k, but the n^2 sorts at 10k
+    //picking the radix sort means you need a stable sort with n log n time
 }

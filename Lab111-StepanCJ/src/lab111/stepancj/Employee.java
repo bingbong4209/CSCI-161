@@ -169,4 +169,13 @@ public class Employee {
         }
         return temp;
     }
+    
+    /**
+     * 
+     * @return contents of Employee instance
+     */
+    public String toString(){
+        //return getClass().getName() + "@" + name + ":" + id + ":" + hired + ":" + dept;
+        return id + "";
+    }
 }
