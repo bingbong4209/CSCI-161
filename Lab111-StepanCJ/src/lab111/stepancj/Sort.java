@@ -27,6 +27,7 @@ public class Sort<K> implements Comparator<K> {
      * @param <K> generic type K
      * @param array input array to be sorted
      */
+    /*
     public static <K> void simpleBubbleSort(K[] array) {
         K[] sortedArray = (K[]) new Object[array.length];
         for (int i = 0; i < array.length; i++) {
@@ -43,12 +44,28 @@ public class Sort<K> implements Comparator<K> {
             }
         }
     }
+    */
+    /**
+     * 
+     * @param <K> generic type K
+     * @param array input array to be converted to a linkedQueue
+     * @return the corresponding linkedQueue for the given array
+     */
+    public static <K> LinkedQueue<K> arrayToQueue(K[] array) {
+        LinkedQueue<K> newQueue = new LinkedQueue<>();
+        for(K index: array) {
+            newQueue.enqueue(index);
+            System.out.println(index);
+        }
+        return newQueue;
+    }
 
     /**
      * 
      * @param <K> generic type K
      * @param array input array to be sorted
      */
+    /*
     public static <K> void enhancedBubbleSort(K[] array) {
         K[] sortedArray = (K[]) new Object[array.length];
         for (int i = 0; i < array.length; i++) {
@@ -133,7 +150,7 @@ public class Sort<K> implements Comparator<K> {
 
     public static <K> void printArray(K[] array) {
         for (int j = 0; j < array.length - 1; j++) {
-            System.out.println(array[j].to);
+            System.out.println(array[j].toString());
         }
     }
 
