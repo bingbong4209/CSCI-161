@@ -78,11 +78,12 @@ public class Sort<K> {
      * @param S the generic input array
      * @param comp the input comparator
      */
-    public static <K> void mergeSort(K[] S, Comparator<K> comp) {
+    /*public static <K> K[] mergeSort(K[] S, Comparator<K> comp) {
+        int iterator = 0;
         int n = S.length;
         //if array is trivially sorted
         if (n < 2) {
-            return;
+            return S;
         }
         int mid = n / 2;
 
@@ -93,9 +94,52 @@ public class Sort<K> {
         mergeSort(S2, comp);
         //merge results
         merge(S1, S2, S, comp);
-        
+        return S;
     }
-    
+    /*
+      public static <K> void merge(K[] S1, K[] S2, K[] S, Comparator<K> comp) {
+        int i = 0, j = 0;
+        while (i + j < S.length) {
+            if (j == S2.length || (i < S1.length && comp.compare(S1[i], S2[j]) < 0)) {
+                S[i + j] = S1[i++]; //copy ith element of S1 and increment i
+            } else {
+                S[i + j] = S2[j++]; //copy jth element of S2 and increment j
+            }
+        }
+    }*/
+    public static <K> K[] mergeSort( K[] S, Comparator<K> comp ){
+          int n = S.length;
+          if ( n < 2 ) return S;
+          
+          int mid = n / 2;
+          
+          //K[] S1 = Arrays.copyOfRange( S, 0, mid );
+          //K[] S2 = Arrays.copyOfRange( S, mid, n );          
+
+          K[] S1 = rangeCopy( S, 0, mid );
+          K[] S2 = rangeCopy( S, mid, n );         
+          
+          mergeSort( S1, comp );
+          mergeSort( S2, comp );
+          
+          merge( S1, S2, S, comp );                    
+          
+          return S;
+      }
+      
+      public static <K> void merge( K[] S1, K[] S2, K[] S, Comparator<K> comp )
+      {
+          int i = 0, j = 0;
+          
+          while ( i + j < S.length )
+          {
+              if ( j == S2.length || ( i < S1.length && comp.compare( S1[i], S2[j] ) < 0 ) )
+                  S[i+j] = S1[i++];
+              else
+                  S[i+j] = S2[j++];                          
+          }          
+      }
+
     /**
      * 
      * @param <K> generic type K
@@ -170,23 +214,5 @@ public class Sort<K> {
         }
     }
 
-    private static <K> void merge(K[] S1, K[] S2, K[] S, Comparator<K> comp) {
-        int i = 0, j = 0;
-        while (i + j < S.length) {
-            if (j == S2.length || (i < S1.length && comp.compare(S1[i], S2[i]) < 0)) {
-                S[i + j] = S1[i++]; //copy ith element of S1 and increment i
-            } else {
-                S[i + j] = S2[i++]; //copy jth element of S2 and increment j
-            }
-        }
-    }
-    
-    public static void main(String[] args) {
-         Employee[] employeeArray = new Employee[5000];
-        for (int i = 0; i < employeeArray.length; i++) {
-            employeeArray[i] = new Employee();
-        }
-        //K[] test = (K[]) rangeCopy(employeeArray, 0, 2500);
-        //System.out.println(rangeCopy(employeeArray, 0, 2500).length);
-    }
+  
 }

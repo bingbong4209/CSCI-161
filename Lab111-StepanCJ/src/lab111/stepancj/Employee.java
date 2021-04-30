@@ -176,6 +176,11 @@ public class Employee {
      */
     public String toString(){
         //return getClass().getName() + "@" + name + ":" + id + ":" + hired + ":" + dept;
-        return id + "";
+            return name + "";
+    }
+    
+    public static void main(String[] args) {
+        Employee e1 = new Employee();
+        System.out.println(e1.getName().charAt(0));
     }
 }

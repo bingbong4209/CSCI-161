@@ -28,9 +28,10 @@ public class Client {
         long[][] sortRunTimes = new long[1][4]; 
         
         //sort on name using the merge sort
-        Comparator<Employee> mergeCompare = new NameComparator();
+        //Comparator<Employee> mergeCompare = new NameComparator();
+        Comparator<Employee> mergeCompare = new StudentComparatorFname();
         start = System.currentTimeMillis();
-        Sort.mergeSort(employeeArray, mergeCompare);
+        Sort.mergeSort(employeeArray, mergeCompare);//problem line
         end = System.currentTimeMillis();
         runTime = end - start;
         System.out.println("Merge Sort Run Time: " + runTime);
@@ -52,7 +53,7 @@ public class Client {
         end = System.currentTimeMillis();
         runTime = end - start;
         sortRunTimes[0][3] = runTime;
-        System.out.println("Simple Bubble SortRun Time: " + runTime);
+        System.out.println("Simple Bubble Sort Run Time: " + runTime);
         
         //enhanced bubble sort
         Comparator<Employee> betterBubbleCompare = new IDComparator();
