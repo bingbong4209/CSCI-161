@@ -53,8 +53,8 @@ public class Sort<K> {
      * 
      * @param <K> generic type K
      * @param array input array to be sorted
+     * @param comp the input comparator
      */
-    
     public static <K> void enhancedBubbleSort(K[] array, Comparator<K> comp) {
         K[] sortedArray = (K[]) new Object[array.length];
         for (int i = 0; i < array.length; i++) {
@@ -72,7 +72,12 @@ public class Sort<K> {
         }
     }
 
-    
+    /**
+     * 
+     * @param <K> generic type K
+     * @param S the generic input array
+     * @param comp the input comparator
+     */
     public static <K> void mergeSort(K[] S, Comparator<K> comp) {
         int n = S.length;
         //if array is trivially sorted
@@ -80,36 +85,51 @@ public class Sort<K> {
             return;
         }
         int mid = n / 2;
-        /*----------------------------------------------------change these 
-        K[] S1 = Arrays.copyOfRange(S, 0, mid); //first half copy
-        K[] S2 = Arrays.copyOfRange(S, mid, n); //second half copy
+
+        K[] S1 = rangeCopy(S, 0, mid); //first half copy
+        K[] S2 = rangeCopy(S, mid, n); //second half copy
         //use recursion to sort
         mergeSort(S1, comp);
         mergeSort(S2, comp);
         //merge results
         merge(S1, S2, S, comp);
-        */
+        
     }
-     
-
+    
+    /**
+     * 
+     * @param <K> generic type K
+     * @param array the input array to be partitioned
+     * @param from the index to partition the array from
+     * @param to the index to end the partition of the array
+     * @return the partitioned array
+     */
+    public static <K> K[] rangeCopy(K[] array, int from, int to) {
+        K[] range = (K[]) new Object[to - from];
+        for(int i = from; i < to - 1; i++) {
+            range[i - from] = array[i];
+        }
+        return range;
+    }
+    
     /**
      *
      * @param <K> generic type K
-     * @param S the input queue to be sorted
+     * @param queue the input queue to be sorted
      * @param comp the comparator to compare the two adjacent elements
      */
-    public static <K> void quickSort(Queue<K> S, Comparator<K> comp) {
-        int n = S.size();
+    public static <K> void quickSort(Queue<K> queue, Comparator<K> comp) {
+        int n = queue.size();
         if (n < 2) {
-            return;                             //if the queue is trivially sorted
+            return;                           //if the queue is trivially sorted
         }        
         //divide
-        K pivot = S.first();
+        K pivot = queue.first();
         Queue<K> L = new LinkedQueue<>();
         Queue<K> E = new LinkedQueue<>();
         Queue<K> G = new LinkedQueue<>();
-        while (!S.isEmpty()) {                  //divide original int L, E, and G     
-            K element = S.dequeue();
+        while (!queue.isEmpty()) {             //divide original int L, E, and G     
+            K element = queue.dequeue();
             int c = comp.compare(element, pivot);
             if (c < 0) {
                 L.enqueue(element);
@@ -124,18 +144,24 @@ public class Sort<K> {
         quickSort(G, comp);
         //concatenate resutls
         while (!L.isEmpty()) {
-            S.enqueue(L.dequeue());
+            queue.enqueue(L.dequeue());
         }
         while (!E.isEmpty()) {
-            S.enqueue(E.dequeue());
+            queue.enqueue(E.dequeue());
         }
         while (!G.isEmpty()) {
-            S.enqueue(G.dequeue());
+            queue.enqueue(G.dequeue());
         }
     }
 
-    public static Employee[] radixSort(Employee[] array) {
-        return array;
+    /**
+     * 
+     * @param <K> generic type K
+     * @param array
+     * @param comp 
+     */
+    public static <K> void radixSort(K[] array, Comparator<K> comp) {
+
     }
 
     public static <K> void printArray(K[] array) {
@@ -153,5 +179,14 @@ public class Sort<K> {
                 S[i + j] = S2[i++]; //copy jth element of S2 and increment j
             }
         }
+    }
+    
+    public static void main(String[] args) {
+         Employee[] employeeArray = new Employee[5000];
+        for (int i = 0; i < employeeArray.length; i++) {
+            employeeArray[i] = new Employee();
+        }
+        //K[] test = (K[]) rangeCopy(employeeArray, 0, 2500);
+        //System.out.println(rangeCopy(employeeArray, 0, 2500).length);
     }
 }

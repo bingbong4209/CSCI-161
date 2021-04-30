@@ -10,7 +10,7 @@ public class NameComparator implements Comparator<Employee> {
      * @param emp2
      * @return which employee name is larger
      */
-    public int compare(Employee emp1, Employee emp2) {
+    public int backBurnerCompare(Employee emp1, Employee emp2) {
         if (emp1.getNameValue() > emp2.getNameValue()) {
             return 1;
         } else if (emp1.getNameValue() < emp2.getNameValue()) {
@@ -25,7 +25,7 @@ public class NameComparator implements Comparator<Employee> {
      * @param emp2
      * @return which employee name comes first in the alphabet\
      */
-    public static int firstLetterNameCompare(Employee emp1, Employee emp2) {
+    public int compare(Employee emp1, Employee emp2) {
         if (emp1.getName().charAt(0) > emp2.getName().charAt(0)) {
             return 1;
         } else if (emp1.getName().charAt(0) < emp2.getName().charAt(0)) {
@@ -34,4 +34,6 @@ public class NameComparator implements Comparator<Employee> {
             return 0;
         }
     }
+    
+    
 }

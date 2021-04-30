@@ -16,10 +16,14 @@ public class Client {
         long start, end, runTime;
         
         //initial employee array setup
-        int size = 5000;
+        int size = 50000;
         Employee[] employeeArray = new Employee[size];
+        Employee[] bubbleArray = new Employee[5000];
         for (int i = 0; i < employeeArray.length; i++) {
             employeeArray[i] = new Employee();
+        }
+        for(int j = 0; j < bubbleArray.length; j++) {
+            bubbleArray[j] = new Employee();
         }
         long[][] sortRunTimes = new long[1][4]; 
         
@@ -44,7 +48,7 @@ public class Client {
         //simple bubble sort
         Comparator<Employee> bubbleCompare = new IDComparator();
         start = System.currentTimeMillis();
-        Sort.simpleBubbleSort(employeeArray, bubbleCompare);
+        Sort.simpleBubbleSort(bubbleArray, bubbleCompare);
         end = System.currentTimeMillis();
         runTime = end - start;
         sortRunTimes[0][3] = runTime;
@@ -53,7 +57,7 @@ public class Client {
         //enhanced bubble sort
         Comparator<Employee> betterBubbleCompare = new IDComparator();
         start = System.currentTimeMillis();
-        Sort.simpleBubbleSort(employeeArray, betterBubbleCompare);
+        Sort.simpleBubbleSort(bubbleArray, betterBubbleCompare);
         end = System.currentTimeMillis();
         runTime = end - start;
         System.out.println("Enhanced Bubble Sort Run Time: " + runTime);
