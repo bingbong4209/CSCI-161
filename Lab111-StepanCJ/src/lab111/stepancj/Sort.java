@@ -6,7 +6,7 @@ package lab111.stepancj;
  * sort
  *
  * @author Calvin Stepan
- * @version 4.29.2021
+ * @version 4.30.2021
  * @param <K> generic type K
  */
 public class Sort<K> {
@@ -17,7 +17,6 @@ public class Sort<K> {
      * @param array input array to be sorted
      * @param comp the comparator used to compared the two objects
      */
-    
     public static <K> void simpleBubbleSort(K[] array, Comparator<K> comp) {
         K[] sortedArray = (K[]) new Object[array.length];
         for (int i = 0; i < array.length; i++) {
@@ -32,7 +31,7 @@ public class Sort<K> {
                     sortedArray[j + 1] = temp;
                 }
             }
-        }
+        }        
     }
     
     /**
@@ -71,50 +70,20 @@ public class Sort<K> {
             }
         }
     }
-
+            
     /**
      * 
      * @param <K> generic type K
-     * @param S the generic input array
-     * @param comp the input comparator
+     * @param S input array
+     * @param comp the comparator to be used
      */
-    /*public static <K> K[] mergeSort(K[] S, Comparator<K> comp) {
-        int iterator = 0;
-        int n = S.length;
-        //if array is trivially sorted
-        if (n < 2) {
-            return S;
-        }
-        int mid = n / 2;
-
-        K[] S1 = rangeCopy(S, 0, mid); //first half copy
-        K[] S2 = rangeCopy(S, mid, n); //second half copy
-        //use recursion to sort
-        mergeSort(S1, comp);
-        mergeSort(S2, comp);
-        //merge results
-        merge(S1, S2, S, comp);
-        return S;
-    }
-    /*
-      public static <K> void merge(K[] S1, K[] S2, K[] S, Comparator<K> comp) {
-        int i = 0, j = 0;
-        while (i + j < S.length) {
-            if (j == S2.length || (i < S1.length && comp.compare(S1[i], S2[j]) < 0)) {
-                S[i + j] = S1[i++]; //copy ith element of S1 and increment i
-            } else {
-                S[i + j] = S2[j++]; //copy jth element of S2 and increment j
-            }
-        }
-    }*/
-    public static <K> K[] mergeSort( K[] S, Comparator<K> comp ){
+    public static <K> void mergeSort( K[] S, Comparator<K> comp ){
           int n = S.length;
-          if ( n < 2 ) return S;
+          if ( n < 2 ) {
+              return;
+          }
           
-          int mid = n / 2;
-          
-          //K[] S1 = Arrays.copyOfRange( S, 0, mid );
-          //K[] S2 = Arrays.copyOfRange( S, mid, n );          
+          int mid = n / 2;          
 
           K[] S1 = rangeCopy( S, 0, mid );
           K[] S2 = rangeCopy( S, mid, n );         
@@ -123,10 +92,17 @@ public class Sort<K> {
           mergeSort( S2, comp );
           
           merge( S1, S2, S, comp );                    
-          
-          return S;
+
       }
       
+    /**
+     * 
+     * @param <K> generic type K
+     * @param S1 the first array to merge
+     * @param S2 the second array to merge
+     * @param S the final array with both merges
+     * @param comp the comparator to be used
+     */
       public static <K> void merge( K[] S1, K[] S2, K[] S, Comparator<K> comp )
       {
           int i = 0, j = 0;
@@ -150,7 +126,7 @@ public class Sort<K> {
      */
     public static <K> K[] rangeCopy(K[] array, int from, int to) {
         K[] range = (K[]) new Object[to - from];
-        for(int i = from; i < to - 1; i++) {
+        for(int i = from; i < to; i++) {
             range[i - from] = array[i];
         }
         return range;
@@ -201,18 +177,15 @@ public class Sort<K> {
     /**
      * 
      * @param <K> generic type K
-     * @param array
-     * @param comp 
+     * @param array the input array to be sorted
+     * @param comp1 the first and most important comparator to sort the array on
+     * @param comp2 the second most important comparator to sort the array on
+     * @param comp3 the third most important comparator to sort the array on
      */
-    public static <K> void radixSort(K[] array, Comparator<K> comp) {
-
+    public static <K> void radixSort(K[] array, Comparator<K> comp1, Comparator<K> comp2, Comparator<K> comp3) {
+        mergeSort(array, comp1);
+        mergeSort(array, comp2);
+        mergeSort(array, comp3);
     }
-
-    public static <K> void printArray(K[] array) {
-        for (int j = 0; j < array.length - 1; j++) {
-            System.out.println(array[j].toString());
-        }
-    }
-
   
 }
