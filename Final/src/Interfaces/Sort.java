@@ -55,21 +55,20 @@ public class Sort<K> {
      * @param comp the input comparator
      */
     public static <K> void enhancedBubbleSort(K[] array, Comparator<K> comp) {
-        K[] sortedArray = (K[]) new Object[array.length];
         for (int i = 0; i < array.length; i++) {
-            sortedArray[i] = array[i];
-        }
-
-        for (K array1 : array) {
+            boolean sorted = true;
             for (int j = 0; j < array.length - j - 1; j++) {
-                if (comp.compare(sortedArray[j], sortedArray[j + 1]) == 1) {
-                    K temp = sortedArray[j];
-                    sortedArray[j] = sortedArray[j + 1];
-                    sortedArray[j + 1] = temp;
+                if (comp.compare(array[j], array[j + 1]) > 0) {
+                    K temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    sorted = false;
                 }
             }
+            if(sorted)
+                break;
         }
-    }
+        }
             
     /**
      * 
