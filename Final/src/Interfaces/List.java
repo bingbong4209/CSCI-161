@@ -1,4 +1,4 @@
-package exam.pkg3.code.bits;
+package Interfaces;
 
 /**
  * Data Structures & Algorithms 6th Edition 

@@ -1,4 +1,4 @@
-package lab110.stepancj;
+package Interfaces;
 
 /**
  * The BinarySearch Tree Class is implemented from an example online found at 

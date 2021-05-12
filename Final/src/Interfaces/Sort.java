@@ -1,4 +1,4 @@
-package exam.pkg3.code.bits;
+package Interfaces;
 
 /**
  * The Sort Class houses various sorts used in the client, such as the simple

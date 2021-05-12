@@ -1,4 +1,4 @@
-package exam.pkg3.code.bits;
+package Interfaces;
 
 /**
  * An interface for a binary tree, in which each node has at most two children
